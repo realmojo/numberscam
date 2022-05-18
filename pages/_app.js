@@ -1,9 +1,16 @@
+import React, { useEffect } from "react";
+import axios from "axios";
 import Head from "next/head";
 import "../styles/globals.css";
-// import "tailwindcss/tailwind.css";
+import "tailwindcss/tailwind.css";
 import "antd/dist/antd.css";
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    axios.get(`https://api.ipify.org?format=json`).then((res) => {
+      localStorage.setItem("ip", res.data.ip ? res.data.ip : "0.0.0.0");
+    });
+  }, []);
   return (
     <>
       <Head>

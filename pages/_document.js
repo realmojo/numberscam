@@ -12,17 +12,14 @@ export default class MyDocument extends Document {
           />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://getcurrencyconvert.com" />
-          <meta
-            property="og:title"
-            content="환율 계산기 - 실시간 각국 통화 변환기"
-          />
+          <meta property="og:title" content="이 번호 뭐야" />
           <meta
             property="og:image"
             content="https://getcurrencyconvert.com/logo.png"
           />
           <meta
             property="og:description"
-            content="180여개의 각국의 나라의 통화를 변환하여 보여줍니다. 환율 정보는 매일 업데이트 되어 실시간으로 확인을 할 수 있습니다. 달러, 원화, 엔화, USD, JYP, EUR, AUD, Currency, Convert"
+            content="모르는 전화번호를 검색해보세요."
           />
           <meta property="og:site_name" content="전화번호부" />
           <meta property="og:locale" content="kr_KO" />
