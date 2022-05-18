@@ -7,9 +7,12 @@ import "antd/dist/antd.css";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    axios.get(`https://api.ipify.org?format=json`).then((res) => {
-      localStorage.setItem("ip", res.data.ip ? res.data.ip : "0.0.0.0");
-    });
+    const ip = localStorage.getItem("ip");
+    if (ip === null) {
+      axios.get(`https://api.ipify.org?format=json`).then((res) => {
+        localStorage.setItem("ip", res.data.ip ? res.data.ip : "0.0.0.0");
+      });
+    }
   }, []);
   return (
     <>

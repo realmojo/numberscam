@@ -4,10 +4,11 @@ import moment from "moment";
 
 const handler = async (req, res) => {
   const { method } = req;
-  const { number, ip, message } = req.query;
+  let { number, ip, message } = req.query;
 
   switch (method) {
     case "POST":
+      number = number.replace(/[^0-9]/g, "");
       let params = {
         number,
         ip,
@@ -26,10 +27,6 @@ const handler = async (req, res) => {
       const item = await newPhone.save();
 
       res.status(200).json({ item: item || {} });
-      // res.status(200).json({ item: "tt" });
-      break;
-    default:
-      res.status(200).json({ message: "hello" });
       break;
   }
 };

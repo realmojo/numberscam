@@ -10,8 +10,17 @@ const handler = async (req, res) => {
       const items = await PhoneComment.findOne({ id }).sort({ created: -1 });
       res.status(200).json({ items: items ? items : [] });
       break;
-    default:
-      res.status(200).json({ message: "hello" });
+    case "POST":
+      const { message, ip } = req.body;
+      const params = {
+        phoneId: id,
+      };
+      // const item = await PhoneComment
+
+      const newPhoneComment = new PhoneComment(params);
+      const item = await newPhoneComment.save();
+
+      res.status(200).json({ item });
       break;
   }
 };
