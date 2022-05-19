@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://phonebookup.com/sitemap.xml

@@ -34,7 +34,7 @@ const ItemsComponent = ({ items }) => {
           className="mb-4"
           xs={{ span: 24 }}
           sm={{ span: 12 }}
-          lg={{ span: 6 }}
+          lg={{ span: 8 }}
         >
           <Card
             type="inner"
