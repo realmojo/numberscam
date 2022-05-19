@@ -1,34 +1,58 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { PageHeader, Input } from "antd";
-const { Search } = Input;
+import Link from "next/link";
+import { PageHeader, Input, Space, Avatar } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
+const suffix = (
+  <SearchOutlined
+    style={{
+      fontSize: 16,
+      color: "#1890ff",
+    }}
+  />
+);
 export const Header = () => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const [number, setNumber] = useState("");
 
-  const onSearch = (value) => {
-    setIsLoading(true);
-    router.push(`/number/${value}`);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
+  const onSearch = () => {
+    router.push(`/number/${number}`);
   };
+
+  const onChange = (e) => {
+    const { value } = e.target;
+    // value의 값이 숫자가 아닐경우 빈문자열로 replace 해버림.
+    const onlyNumber = value.replace(/[^0-9-]/g, "");
+    console.log(onlyNumber);
+    setNumber(onlyNumber);
+  };
+
   return (
     <>
       <PageHeader
         style={{ background: "#1890ff" }}
         className="site-page-header"
         title={
-          <Search
-            style={{ flex: 1 }}
-            placeholder="전화번호를 검색하세요"
-            allowClear
-            // enterButton="Search"
-            loading={isLoading ? true : false}
-            size="large"
-            onSearch={onSearch}
-          />
+          <Space>
+            <Link href="/">
+              <Avatar
+                style={{ cursor: "pointer", width: 50, height: 50 }}
+                src="https://phonebookup.s3.ap-northeast-2.amazonaws.com/logo.png"
+              />
+            </Link>
+
+            <Input.Group compact style={{ minWidth: "400px" }}>
+              <Input
+                size="large"
+                value={number}
+                onChange={onChange}
+                placeholder="전화번호를 검색하세요"
+                onPressEnter={() => onSearch()}
+                suffix={suffix}
+              />
+            </Input.Group>
+          </Space>
         }
       />
     </>

@@ -1,5 +1,15 @@
 export const API_URL = "http://localhost:3000";
-export const PHONE_START_NUMBER = ["010", "011", "016", "017", "018", "019"];
+export const PHONE_START_NUMBER = [
+  "010",
+  "011",
+  "016",
+  "017",
+  "018",
+  "019",
+  "050",
+  "070",
+  "080",
+];
 export const LOCATION_START_NUMBER = [
   "02",
   "031",

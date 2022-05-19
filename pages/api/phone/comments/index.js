@@ -7,9 +7,7 @@ const handler = async (req, res) => {
 
   switch (method) {
     case "GET":
-      const commentItems = await PhoneComment.find({ number }).sort({
-        created: -1,
-      });
+      const commentItems = await PhoneComment.find({ number });
       res.status(200).json({ commentItems });
       break;
   }

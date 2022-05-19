@@ -4,6 +4,7 @@ import Head from "next/head";
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import "antd/dist/antd.css";
+import NextNProgress from "nextjs-progressbar";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -28,6 +29,13 @@ function MyApp({ Component, pageProps }) {
           crossorigin="anonymous"
         ></script> */}
       </Head>
+      <NextNProgress
+        color="#fff"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={1}
+        showOnShallow={true}
+      />
       <Component {...pageProps} />
     </>
   );

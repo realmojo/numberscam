@@ -6,7 +6,7 @@ const handler = async (req, res) => {
 
   switch (method) {
     case "GET":
-      const recentlyItems = await PhoneComment.find()
+      const recentlyItems = await PhoneComment.find({ isDelete: false })
         .sort({
           created: -1,
         })

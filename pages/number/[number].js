@@ -1,94 +1,22 @@
-import Phone from "../../models/Phone";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import moment from "moment";
-import "moment/locale/ko"; // 이줄 추가
-import {
-  Row,
-  Col,
-  List,
-  Form,
-  Input,
-  Button,
-  Avatar,
-  Divider,
-  Comment,
-  Tooltip,
-  Typography,
-} from "antd";
-const { TextArea } = Input;
+import { Row, Col, Form, Input, Button, Divider, Typography } from "antd";
 const { Title, Paragraph } = Typography;
+import { Comments } from "../../components/Comment";
+import { Recently } from "../../components/Recently";
 import { Header } from "../../components/Header";
-import {
-  API_URL,
-  PHONE_START_NUMBER,
-  LOCATION_START_NUMBER,
-} from "../../config";
-
-const data = [
-  {
-    title: "02-441-1213",
-  },
-  {
-    title: "02-441-1213",
-  },
-  {
-    title: "02-441-1213",
-  },
-  {
-    title: "02-441-1213",
-  },
-  {
-    title: "02-441-1213",
-  },
-  {
-    title: "02-441-1213",
-  },
-];
-
-const convertIP = (value) => {
-  const s = value.split(".");
-  return `${s[0]}.x.x.${s[3]}`;
-};
-
-const getTitle = (n) => {
-  const length = n.length;
-  let dashNumber = "";
-  let d = n.split("");
-  if (length === 8) {
-    // 1544-3323
-    d.splice(4, 0, "-");
-    dashNumber = d.join("");
-  } else if (
-    // 010-xxxx-xxxx
-    length === 11 &&
-    PHONE_START_NUMBER.includes(`${n[0]}${n[1]}${n[2]}`)
-  ) {
-    d.splice(3, 0, "-");
-    d.splice(8, 0, "-");
-    dashNumber = d.join("");
-  } else if (
-    // 02-xxxx-xxxx
-    length === 10 &&
-    LOCATION_START_NUMBER.includes(`${n[0]}${n[1]}`)
-  ) {
-    d.splice(2, 0, "-");
-    d.splice(7, 0, "-");
-    dashNumber = d.join("");
-  }
-
-  return `${n} / ${dashNumber}`;
-};
+import { API_URL } from "../../config";
+import { getTitle } from "../../utils";
 
 export const NumberPage = ({ item }) => {
   const { number, content, ip, created, updated } = item;
   const [message, setMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
   const [comments, setComments] = useState([]);
-  const [recently, setRecently] = useState([]);
-
-  const handleSubmit = () => {
+  const submit = (number, message) => {
     if (!message) {
       setIsEmpty(true);
       setTimeout(() => {
@@ -104,20 +32,35 @@ export const NumberPage = ({ item }) => {
       ip: localStorage.getItem("ip"),
     };
     axios.post(`${API_URL}/api/phone/comment`, params).then((res) => {
-      setComments([res.data.item, ...comments]);
+      setComments([...comments, res.data.item]);
       setIsLoading(false);
+      setMessage("");
+      setIsComplete(true);
+      setTimeout(() => {
+        setIsComplete(false);
+      }, 2000);
     });
   };
-
+  const handleClickSubmit = () => {
+    submit(number, message);
+  };
+  const handleSubmit = useCallback(
+    (e) => {
+      if (e.keyCode === 13) {
+        submit(number, message);
+      }
+    },
+    [message]
+  );
+  const onChange = (e) => {
+    const { value } = e.target;
+    setMessage(value);
+  };
   useEffect(() => {
     axios.get(`${API_URL}/api/phone/comments?number=${number}`).then((res) => {
       setComments(res.data.commentItems || []);
     });
-    axios.get(`${API_URL}/api/phone/comments/recently`).then((res) => {
-      setRecently(res.data.recentlyItems || []);
-    });
   }, [number]);
-
   return (
     <>
       <Header />
@@ -132,50 +75,38 @@ export const NumberPage = ({ item }) => {
           <Divider />
           <Paragraph className="text-right text-gray-400">{created}</Paragraph>
           <p className="content-wrap">
-            {content ? content : "처음으로 댓글로 번호에 대해서 알려주세요"}
+            {comments[0] !== undefined ? comments[0].message : ""}
           </p>
+          <Divider style={{ margin: "8px 0" }} />
           <Form.Item>
-            <div className="mb-2">
-              <span className="mr-2">📌</span> 당신의 도움으로 큰 피해를 막을 수
+            <div className="mb-2 text-xs">
+              <span className="mr-2">👉</span> 당신의 도움으로 큰 피해를 막을 수
               있습니다.
             </div>
-            <TextArea
-              rows={2}
-              status={isEmpty ? "error" : ""}
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-              placeholder="이 번호에 대해서 알려주세요."
-            />
-          </Form.Item>
-          <Form.Item>
-            <Button
-              htmlType="submit"
-              loading={isLoading}
-              onClick={() => handleSubmit()}
-              type="primary"
-            >
-              Add Comment
-            </Button>
-          </Form.Item>
-          {comments.map((item, index) => (
-            <React.Fragment key={index}>
-              <Comment
-                author={<a>({convertIP(item.ip)})</a>}
-                avatar={
-                  <Avatar
-                    src="https://joeschmoe.io/api/v1/random"
-                    alt="Han Solo"
-                  />
-                }
-                content={<p>{item.message}</p>}
-                datetime={
-                  <Tooltip title={item.created}>
-                    <span>{moment(item.created).fromNow()}</span>
-                  </Tooltip>
-                }
+            <Input.Group compact>
+              <Input
+                style={{ width: "calc(100% - 80px)" }}
+                value={message}
+                status={isEmpty ? "error" : ""}
+                onChange={onChange}
+                placeholder="이 번호에 대해서 알려주세요."
+                onKeyDown={(e) => {
+                  handleSubmit(e);
+                }}
               />
-              <Divider style={{ margin: "4px 0" }} />
-            </React.Fragment>
+              <Button
+                htmlType="submit"
+                loading={isLoading}
+                onClick={(e) => handleClickSubmit(e)}
+                type="primary"
+              >
+                등록
+              </Button>
+            </Input.Group>
+          </Form.Item>
+          {isComplete && <div className="ml-2">등록이 완료되었습니다.</div>}
+          {comments.map((item, index) => (
+            <Comments index={index} key={index} item={item} />
           ))}
         </Col>
         <Col
@@ -184,19 +115,7 @@ export const NumberPage = ({ item }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
-          <List
-            itemLayout="horizontal"
-            dataSource={recently}
-            renderItem={(item) => (
-              <List.Item>
-                <List.Item.Meta
-                  avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                  title={<a href="https://ant.design">{item.number}</a>}
-                  description={item.message}
-                />
-              </List.Item>
-            )}
-          />
+          <Recently number={number} />
         </Col>
       </Row>
     </>
@@ -207,12 +126,25 @@ export default NumberPage;
 export const getServerSideProps = async ({ params }) => {
   let { number } = params;
   number = number.replace(/[^0-9]/g, "");
-  const response = await Phone.findOne({ number });
-  if (response) {
-    const item =
-      response && response.number ? JSON.parse(JSON.stringify(response)) : {};
 
-    // console.log(item.id);
+  if (number === "") {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
+      props: {},
+    };
+  }
+
+  const response = await axios.get(
+    `${process.env.API_URL}/api/phone/${number}`
+  );
+  if (response.data) {
+    const item =
+      response.data && response.data.number
+        ? JSON.parse(JSON.stringify(response.data))
+        : {};
 
     return { props: { item } };
   } else {
