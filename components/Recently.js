@@ -29,7 +29,11 @@ export const Recently = ({ number }) => {
             }
             title={
               <>
-                <Link href={`/number/${item.number}`}>{item.number}</Link>
+                <Link href={`/number/${item.number}`}>
+                  <span style={{ cursor: "pointer", color: "#1890ff" }}>
+                    {item.number}
+                  </span>
+                </Link>
                 <Tooltip title={item.created}>
                   <span
                     className="ml-2"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import Head from "next/head";
 import axios from "axios";
 import moment from "moment";
 import { Row, Col, Form, Input, Button, Divider, Typography } from "antd";
@@ -63,6 +64,9 @@ export const NumberPage = ({ item }) => {
   }, [number]);
   return (
     <>
+      <Head>
+        <title>{getTitle(number)} - 이 번호 알려줘 - 폰북</title>
+      </Head>
       <Header />
       <Row className="pt-4 container-wrap">
         <Col
@@ -72,10 +76,12 @@ export const NumberPage = ({ item }) => {
           className="px-4"
         >
           <Title>{getTitle(number)}</Title>
-          <Divider />
+          <Divider style={{ margin: "4px 0" }} />
           <Paragraph className="text-right text-gray-400">{created}</Paragraph>
           <p className="content-wrap">
-            {comments[0] !== undefined ? comments[0].message : ""}
+            {comments[0] !== undefined
+              ? comments[0].message
+              : "아직 등록되지 않은 번호 입니다. 첫 댓글이 내용으로 들어갑니다."}
           </p>
           <Divider style={{ margin: "8px 0" }} />
           <Form.Item>
