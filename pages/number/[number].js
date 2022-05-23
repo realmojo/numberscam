@@ -139,7 +139,6 @@ export const getServerSideProps = async ({ params }) => {
     };
   }
 
-  console.log(`${process.env.BASE_URL}`);
   const response = await axios.get(
     `${process.env.BASE_URL}/api/phone/${number}`
   );

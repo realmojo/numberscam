@@ -5,7 +5,7 @@ import convert from "xml-js";
 import moment from "moment";
 
 const updateSitemap = (number) => {
-  console.log("sitemap: ", number);
+  console.log("sitemap add number: ", number);
   const p = process.env.NODE_ENV === "production" ? "/opt" : ".";
   const f = process.env.NODE_ENV === "production" ? "/phonebookup/public" : "";
   var json = fs.readFileSync(`${p}/sitemap.json`, "utf8");
@@ -13,7 +13,7 @@ const updateSitemap = (number) => {
 
   d.urlset.url.push({
     loc: {
-      _text: `https://phonebookup.com/${number}`,
+      _text: `https://phonebookup.com/number/${number}`,
     },
     lastmod: { _text: moment().format("YYYY-MM-DD") },
     priority: { _text: "1.0" },
@@ -22,17 +22,13 @@ const updateSitemap = (number) => {
   var options = { compact: true, ignoreComment: true, spaces: 2 };
   var result = convert.json2xml(JSON.stringify(d), options);
   fs.writeFile(`${p}/sitemap.json`, JSON.stringify(d), function (err) {
-    if (err === null) {
-      console.log("success");
-    } else {
-      console.log("fail");
+    if (err !== null) {
+      console.log("sitemap fail");
     }
   });
   fs.writeFile(`${p}${f}/sitemap.xml`, result, function (err) {
-    if (err === null) {
-      console.log("success");
-    } else {
-      console.log("fail");
+    if (err !== null) {
+      console.log("sitemap fail");
     }
   });
 };
