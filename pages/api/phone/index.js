@@ -1,6 +1,5 @@
 import dbConnect from "../../../lib/mongodb";
 import Phone from "../../../models/Phone";
-import moment from "moment";
 
 const handler = async (req, res) => {
   const { method } = req;
@@ -21,6 +20,8 @@ const handler = async (req, res) => {
 
         const newPhone = new Phone(params);
         const item = await newPhone.save();
+
+        // sitemap 등록
 
         res.status(200).json(item || {});
         break;

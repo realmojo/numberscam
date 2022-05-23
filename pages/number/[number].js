@@ -45,14 +45,11 @@ export const NumberPage = ({ item }) => {
   const handleClickSubmit = () => {
     submit(number, message);
   };
-  const handleSubmit = useCallback(
-    (e) => {
-      if (e.keyCode === 13) {
-        submit(number, message);
-      }
-    },
-    [message]
-  );
+  const handleSubmit = (e) => {
+    if (e.keyCode === 13) {
+      submit(number, message);
+    }
+  };
   const onChange = (e) => {
     const { value } = e.target;
     setMessage(value);

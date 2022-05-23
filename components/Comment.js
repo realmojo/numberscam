@@ -4,7 +4,7 @@ import "moment/locale/ko";
 import { Avatar, Divider, Comment, Tooltip } from "antd";
 import { convertIP, getRandomImageLink } from "../utils";
 
-export const Comments = React.memo(({ item, index }) => {
+const Comments = React.memo(({ item, index }) => {
   return (
     <>
       <Comment
@@ -21,3 +21,7 @@ export const Comments = React.memo(({ item, index }) => {
     </>
   );
 });
+
+Comments.displayName = "comments";
+
+export { Comments };
