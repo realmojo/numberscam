@@ -1,7 +1,6 @@
 import { Header } from "../components/Header";
 import { Row, Col, Card, Skeleton } from "antd";
 import axios from "axios";
-import { API_URL } from "../config";
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import "moment/locale/ko";
@@ -57,7 +56,7 @@ const Home = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API_URL}/api/phone/comments/recently`).then((res) => {
+    axios.get(`/api/phone/comments/recently`).then((res) => {
       setItems(res.data.recentlyItems || []);
     });
   }, []);

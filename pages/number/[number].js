@@ -7,7 +7,6 @@ const { Title, Paragraph } = Typography;
 import { Comments } from "../../components/Comment";
 import { Recently } from "../../components/Recently";
 import { Header } from "../../components/Header";
-import { API_URL } from "../../config";
 import { getTitle } from "../../utils";
 
 export const NumberPage = ({ item }) => {
@@ -32,7 +31,7 @@ export const NumberPage = ({ item }) => {
       message,
       ip: localStorage.getItem("ip"),
     };
-    axios.post(`${API_URL}/api/phone/comment`, params).then((res) => {
+    axios.post(`/api/phone/comment`, params).then((res) => {
       setComments([...comments, res.data.item]);
       setIsLoading(false);
       setMessage("");
@@ -55,7 +54,7 @@ export const NumberPage = ({ item }) => {
     setMessage(value);
   };
   useEffect(() => {
-    axios.get(`${API_URL}/api/phone/comments?number=${number}`).then((res) => {
+    axios.get(`/api/phone/comments?number=${number}`).then((res) => {
       setComments(res.data.commentItems || []);
     });
   }, [number]);
@@ -140,9 +139,7 @@ export const getServerSideProps = async ({ params }) => {
     };
   }
 
-  const response = await axios.get(
-    `${process.env.API_URL}/api/phone/${number}`
-  );
+  const response = await axios.get(`/api/phone/${number}`);
   if (response.data) {
     const item =
       response.data && response.data.number
@@ -155,7 +152,7 @@ export const getServerSideProps = async ({ params }) => {
       data: { ip },
     } = await axios.get(`https://api.ipify.org?format=json`);
 
-    const { data } = await axios.post(`${process.env.API_URL}/api/phone`, {
+    const { data } = await axios.post(`/api/phone`, {
       number,
       ip,
     });

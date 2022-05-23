@@ -5,13 +5,12 @@ import { List, Button, Tooltip } from "antd";
 import moment from "moment";
 import "moment/locale/ko";
 import { PhoneOutlined } from "@ant-design/icons";
-import { API_URL } from "../config";
 
 export const Recently = ({ number }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API_URL}/api/phone/comments/recently`).then((res) => {
+    axios.get(`/api/phone/comments/recently`).then((res) => {
       setItems(res.data.recentlyItems || []);
     });
   }, [number]);
