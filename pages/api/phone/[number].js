@@ -1,6 +1,5 @@
 import dbConnect from "../../../lib/mongodb";
 import Phone from "../../../models/Phone";
-import moment from "moment";
 
 const handler = async (req, res) => {
   const { method } = req;
