@@ -139,7 +139,10 @@ export const getServerSideProps = async ({ params }) => {
     };
   }
 
-  const response = await axios.get(`/api/phone/${number}`);
+  console.log(`${process.env.BASE_URL}`);
+  const response = await axios.get(
+    `${process.env.BASE_URL}/api/phone/${number}`
+  );
   if (response.data) {
     const item =
       response.data && response.data.number
@@ -152,7 +155,7 @@ export const getServerSideProps = async ({ params }) => {
       data: { ip },
     } = await axios.get(`https://api.ipify.org?format=json`);
 
-    const { data } = await axios.post(`/api/phone`, {
+    const { data } = await axios.post(`${process.env.BASE_URL}/api/phone`, {
       number,
       ip,
     });

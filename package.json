@@ -14,12 +14,14 @@
     "@heroicons/react": "^1.0.6",
     "antd": "^4.20.5",
     "axios": "^0.27.2",
+    "fs": "^0.0.1-security",
     "moment": "^2.29.3",
     "mongoose": "^6.3.3",
     "next": "12.1.6",
     "nextjs-progressbar": "^0.0.14",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
