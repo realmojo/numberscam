@@ -9,7 +9,12 @@ const Comments = React.memo(({ item, index }) => {
     <>
       <Comment
         author={<a>({convertIP(item.ip)})</a>}
-        avatar={<Avatar src={getRandomImageLink()} alt={`Image ${index}`} />}
+        avatar={
+          <Avatar
+            src="https://phonebookup.s3.ap-northeast-2.amazonaws.com/account.png"
+            alt={`Image ${index}`}
+          />
+        }
         content={<p>{item.message}</p>}
         datetime={
           <Tooltip title={item.created}>

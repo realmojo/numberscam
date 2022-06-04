@@ -45,6 +45,16 @@ var external_antd_ = __webpack_require__(5725);
 
 const { Footer  } = external_antd_.Layout;
 function MyApp({ Component , pageProps  }) {
+    const schemaData = {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        name: "\uD3F0\uBD81\uC5C5 - \uC774 \uBC88\uD638 \uCC3E\uC544\uC918",
+        url: "http://www.phonebookup.com",
+        image: "https://phonebookup.s3.ap-northeast-2.amazonaws.com/logo.png",
+        description: "\uC2A4\uD338 \uC804\uD654\uBC88\uD638\uBD80\uB97C \uAC19\uC774 \uB9CC\uB4E4\uC5B4\uB098\uAC00\uB294 \uC704\uD0A4 \uC11C\uBE44\uC2A4\uC785\uB2C8\uB2E4. \uBAA8\uB974\uB294 \uC804\uD654\uBC88\uD638\uB97C \uAC80\uC0C9\uD558\uC138\uC694. \uB2F9\uC2E0\uC758 \uC18C\uC911\uD55C \uD55C \uC904\uC774 \uB9CE\uC740 \uC0AC\uB78C\uB4E4\uC744 \uBCF4\uC774\uC2A4\uD53C\uC2F1\uC73C\uB85C\uBD80\uD130 \uAD6C\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.",
+        brand: "Phonebookup",
+        datePublished: "2022-05-15"
+    };
     (0,external_react_.useEffect)(()=>{
         const ip = localStorage.getItem("ip");
         if (ip === null) {
@@ -61,9 +71,27 @@ function MyApp({ Component , pageProps  }) {
                         name: "viewport",
                         content: "width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
                     }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                        property: "og:type",
+                        content: "website"
+                    }),
                     /*#__PURE__*/ jsx_runtime_.jsx("link", {
                         rel: "icon",
                         href: "/favicon.ico"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                        property: "og:url",
+                        content: "http://phonebookup.com"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                        property: "og:image",
+                        content: "https://phonebookup.s3.ap-northeast-2.amazonaws.com/logo.png"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("script", {
+                        type: "application/ld+json",
+                        dangerouslySetInnerHTML: {
+                            __html: JSON.stringify(schemaData)
+                        }
                     })
                 ]
             }),

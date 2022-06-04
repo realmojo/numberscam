@@ -57,7 +57,7 @@ const Comments = /*#__PURE__*/ external_react_default().memo(({ item , index  })
                     ]
                 }),
                 avatar: /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.Avatar, {
-                    src: (0,utils/* getRandomImageLink */.zY)(),
+                    src: "https://phonebookup.s3.ap-northeast-2.amazonaws.com/account.png",
                     alt: `Image ${index}`
                 }),
                 content: /*#__PURE__*/ jsx_runtime_.jsx("p", {
@@ -95,6 +95,7 @@ var icons_ = __webpack_require__(7066);
 
 
 
+
 const Recently = ({ number  })=>{
     const { 0: items , 1: setItems  } = (0,external_react_.useState)([]);
     (0,external_react_.useEffect)(()=>{
@@ -104,52 +105,63 @@ const Recently = ({ number  })=>{
     }, [
         number
     ]);
-    return /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.List, {
-        itemLayout: "horizontal",
-        dataSource: items,
-        renderItem: (item)=>/*#__PURE__*/ jsx_runtime_.jsx(external_antd_.List.Item, {
-                children: /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.List.Item.Meta, {
-                    avatar: /*#__PURE__*/ jsx_runtime_.jsx("a", {
-                        href: `tel: ${item.number}`,
-                        children: /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.Button, {
-                            shape: "circle",
-                            icon: /*#__PURE__*/ jsx_runtime_.jsx(icons_.PhoneOutlined, {}),
-                            size: "middle"
-                        })
-                    }),
-                    title: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                                href: `/number/${item.number}`,
-                                children: /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                    style: {
-                                        cursor: "pointer",
-                                        color: "#1890ff"
-                                    },
-                                    children: item.number
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+        children: [
+            /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.Typography.Title, {
+                level: 2,
+                style: {
+                    margin: 0
+                },
+                children: "\uCD5C\uADFC\uC5D0 \uB4F1\uB85D\uB41C \uC804\uD654\uBC88\uD638"
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.List, {
+                itemLayout: "horizontal",
+                dataSource: items,
+                renderItem: (item)=>/*#__PURE__*/ jsx_runtime_.jsx(external_antd_.List.Item, {
+                        children: /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.List.Item.Meta, {
+                            avatar: /*#__PURE__*/ jsx_runtime_.jsx("a", {
+                                href: `tel: ${item.number}`,
+                                children: /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.Button, {
+                                    shape: "circle",
+                                    icon: /*#__PURE__*/ jsx_runtime_.jsx(icons_.PhoneOutlined, {}),
+                                    size: "middle"
                                 })
                             }),
-                            /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.Tooltip, {
-                                title: item.created,
-                                children: /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                    className: "ml-2",
-                                    style: {
-                                        fontSize: 12,
-                                        color: "#bbb"
-                                    },
-                                    children: external_moment_default()(item.created).fromNow()
-                                })
+                            title: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                        href: `/number/${item.number}`,
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                            style: {
+                                                cursor: "pointer",
+                                                color: "#1890ff"
+                                            },
+                                            children: item.number
+                                        })
+                                    }),
+                                    /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.Tooltip, {
+                                        title: item.created,
+                                        children: /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                            className: "ml-2",
+                                            style: {
+                                                fontSize: 12,
+                                                color: "#bbb"
+                                            },
+                                            children: external_moment_default()(item.created).fromNow()
+                                        })
+                                    })
+                                ]
+                            }),
+                            description: /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                style: {
+                                    color: "#000"
+                                },
+                                children: item.message
                             })
-                        ]
-                    }),
-                    description: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        style: {
-                            color: "#000"
-                        },
-                        children: item.message
+                        })
                     })
-                })
             })
+        ]
     });
 };
 
@@ -167,13 +179,23 @@ const { Title , Paragraph  } = external_antd_.Typography;
 
 
 
-const NumberPage = ({ item: item1  })=>{
+const NumberPage = ({ item: item1 , commentItems  })=>{
     const { number: number1 , content , ip , created , updated  } = item1;
     const { 0: message1 , 1: setMessage  } = (0,external_react_.useState)("");
     const { 0: isEmpty , 1: setIsEmpty  } = (0,external_react_.useState)(false);
     const { 0: isLoading , 1: setIsLoading  } = (0,external_react_.useState)(false);
     const { 0: isComplete , 1: setIsComplete  } = (0,external_react_.useState)(false);
-    const { 0: comments , 1: setComments  } = (0,external_react_.useState)([]);
+    const { 0: comments , 1: setComments  } = (0,external_react_.useState)(commentItems);
+    const schemaData = {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        name: "\uD3F0\uBD81\uC5C5 - \uC774 \uBC88\uD638 \uCC3E\uC544\uC918",
+        url: "http://www.phonebookup.com",
+        image: "https://phonebookup.s3.ap-northeast-2.amazonaws.com/logo.png",
+        description: `${(0,utils/* getTitle */.YQ)(number1)} 번호는 ${comments[0] ? `${comments[0].message} ` : ""}${created} 시간에 생성되어진 번호 입니다.`,
+        brand: "Phonebookup",
+        datePublished: "2022-05-15"
+    };
     const submit = (number, message)=>{
         if (!message) {
             setIsEmpty(true);
@@ -214,22 +236,56 @@ const NumberPage = ({ item: item1  })=>{
         const { value  } = e.target;
         setMessage(value);
     };
-    (0,external_react_.useEffect)(()=>{
-        external_axios_default().get(`/api/phone/comments?number=${number1}`).then((res)=>{
-            setComments(res.data.commentItems || []);
-        });
-    }, [
-        number1
-    ]);
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
         children: [
-            /*#__PURE__*/ jsx_runtime_.jsx((head_default()), {
-                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("title", {
-                    children: [
-                        (0,utils/* getTitle */.YQ)(number1),
-                        " - \uC774 \uBC88\uD638 \uC54C\uB824\uC918 - \uD3F0\uBD81"
-                    ]
-                })
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)((head_default()), {
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("title", {
+                        children: [
+                            (0,utils/* getTitle */.YQ)(number1),
+                            " - ",
+                            comments[0] ? `${comments[0].message} ` : "",
+                            " - \uC774 \uBC88\uD638 \uC54C\uB824\uC918 | \uD3F0\uBD81"
+                        ]
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                        name: "description",
+                        content: `${(0,utils/* getTitle */.YQ)(number1)} 번호는 ${comments[0] ? `${comments[0].message} ` : ""}${created} 시간에 생성되어진 번호 입니다.`
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                        name: "viewport",
+                        content: "width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                        property: "og:title"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                        property: "og:type",
+                        content: "website"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("link", {
+                        rel: "icon",
+                        href: "/favicon.ico"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                        property: "og:url",
+                        content: "http://phonebookup.com"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                        property: "og:image",
+                        content: "https://phonebookup.s3.ap-northeast-2.amazonaws.com/logo.png"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                        property: "og:description",
+                        content: `${(0,utils/* getTitle */.YQ)(number1)} 번호는 ${comments[0] ? `${comments[0].message} ` : ""}${created} 시간에 생성되어진 번호 입니다.`
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("script", {
+                        type: "application/ld+json",
+                        dangerouslySetInnerHTML: {
+                            __html: JSON.stringify(schemaData)
+                        }
+                    })
+                ]
             }),
             /*#__PURE__*/ jsx_runtime_.jsx(Header/* Header */.h, {}),
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)(external_antd_.Row, {
@@ -354,9 +410,11 @@ const getServerSideProps = async ({ params  })=>{
     const response = await external_axios_default().get(`${process.env.BASE_URL}/api/phone/${number}`);
     if (response.data) {
         const item = response.data && response.data.number ? JSON.parse(JSON.stringify(response.data)) : {};
+        const { data: { commentItems  } ,  } = await external_axios_default().get(`${process.env.BASE_URL}/api/phone/comments?number=${number}`);
         return {
             props: {
-                item
+                item,
+                commentItems
             }
         };
     } else {

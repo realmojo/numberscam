@@ -1,14 +1,14 @@
 {
+  "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
-  "/_error": "pages/_error.js",
   "/api/phone/[number]": "pages/api/phone/[number].js",
   "/api": "pages/api.js",
+  "/_error": "pages/_error.js",
   "/api/phone/comments": "pages/api/phone/comments.js",
-  "/api/phone/comment": "pages/api/phone/comment.js",
-  "/api/phone": "pages/api/phone.js",
   "/api/phone/comments/recently": "pages/api/phone/comments/recently.js",
   "/": "pages/index.html",
-  "/_app": "pages/_app.js",
+  "/api/phone": "pages/api/phone.js",
+  "/api/phone/comment": "pages/api/phone/comment.js",
   "/number/[number]": "pages/number/[number].js",
   "/404": "pages/404.html"
 }

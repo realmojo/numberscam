@@ -6,22 +6,6 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://phonebookup.com" />
-          <meta
-            property="og:title"
-            content="전화번호를 검색해 보세요 - 폰북업"
-          />
-          <meta
-            property="og:image"
-            content="https://phonebookup.com/logo.png"
-          />
-          <meta
-            property="og:description"
-            content="모르는 전화번호를 검색해보세요."
-          />
-          <meta property="og:site_name" content="전화번호부 - 폰북업" />
-          <meta property="og:locale" content="en_US" />
           {/* <meta
             name="google-site-verification"
             content="1zQXdxFIylzLZ-URScUVzPG3jyOm-5cG-8qbRLJCdIQ"

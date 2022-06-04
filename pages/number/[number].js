@@ -9,13 +9,25 @@ import { Recently } from "../../components/Recently";
 import { Header } from "../../components/Header";
 import { getTitle } from "../../utils";
 
-export const NumberPage = ({ item }) => {
+export const NumberPage = ({ item, commentItems }) => {
   const { number, content, ip, created, updated } = item;
   const [message, setMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState(commentItems);
+  const schemaData = {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    name: "폰북업 - 이 번호 찾아줘",
+    url: "http://www.phonebookup.com",
+    image: "https://phonebookup.s3.ap-northeast-2.amazonaws.com/logo.png",
+    description: `${getTitle(number)} 번호는 ${
+      comments[0] ? `${comments[0].message} ` : ""
+    }${created} 시간에 생성되어진 번호 입니다.`,
+    brand: "Phonebookup",
+    datePublished: "2022-05-15",
+  };
   const submit = (number, message) => {
     if (!message) {
       setIsEmpty(true);
@@ -53,15 +65,42 @@ export const NumberPage = ({ item }) => {
     const { value } = e.target;
     setMessage(value);
   };
-  useEffect(() => {
-    axios.get(`/api/phone/comments?number=${number}`).then((res) => {
-      setComments(res.data.commentItems || []);
-    });
-  }, [number]);
+
   return (
     <>
       <Head>
-        <title>{getTitle(number)} - 이 번호 알려줘 - 폰북</title>
+        <title>
+          {getTitle(number)} - {comments[0] ? `${comments[0].message} ` : ""} -
+          이 번호 알려줘 | 폰북
+        </title>
+        <meta
+          name="description"
+          content={`${getTitle(number)} 번호는 ${
+            comments[0] ? `${comments[0].message} ` : ""
+          }${created} 시간에 생성되어진 번호 입니다.`}
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
+        />
+        <meta property="og:title" />
+        <meta property="og:type" content="website" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:url" content="http://phonebookup.com" />
+        <meta
+          property="og:image"
+          content="https://phonebookup.s3.ap-northeast-2.amazonaws.com/logo.png"
+        />
+        <meta
+          property="og:description"
+          content={`${getTitle(number)} 번호는 ${
+            comments[0] ? `${comments[0].message} ` : ""
+          }${created} 시간에 생성되어진 번호 입니다.`}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
       </Head>
       <Header />
       <Row className="pt-4 container-wrap">
@@ -148,7 +187,13 @@ export const getServerSideProps = async ({ params }) => {
         ? JSON.parse(JSON.stringify(response.data))
         : {};
 
-    return { props: { item } };
+    const {
+      data: { commentItems },
+    } = await axios.get(
+      `${process.env.BASE_URL}/api/phone/comments?number=${number}`
+    );
+
+    return { props: { item, commentItems } };
   } else {
     const {
       data: { ip },

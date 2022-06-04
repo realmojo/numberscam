@@ -22,38 +22,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_1__["default"] {
     render() {
         return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(next_document__WEBPACK_IMPORTED_MODULE_1__.Html, {
             children: [
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(next_document__WEBPACK_IMPORTED_MODULE_1__.Head, {
-                    children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
-                            property: "og:type",
-                            content: "website"
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
-                            property: "og:url",
-                            content: "https://phonebookup.com"
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
-                            property: "og:title",
-                            content: "\uC804\uD654\uBC88\uD638\uB97C \uAC80\uC0C9\uD574 \uBCF4\uC138\uC694 - \uD3F0\uBD81\uC5C5"
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
-                            property: "og:image",
-                            content: "https://phonebookup.com/logo.png"
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
-                            property: "og:description",
-                            content: "\uBAA8\uB974\uB294 \uC804\uD654\uBC88\uD638\uB97C \uAC80\uC0C9\uD574\uBCF4\uC138\uC694."
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
-                            property: "og:site_name",
-                            content: "\uC804\uD654\uBC88\uD638\uBD80 - \uD3F0\uBD81\uC5C5"
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
-                            property: "og:locale",
-                            content: "en_US"
-                        })
-                    ]
-                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_document__WEBPACK_IMPORTED_MODULE_1__.Head, {}),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("body", {
                     children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         id: "root",
