@@ -46,11 +46,11 @@ function MyApp({ Component, pageProps }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
-        {/* <script
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9130836798889522"
-          crossorigin="anonymous"
-        ></script> */}
+          crossOrigin="anonymous"
+        />
       </Head>
       <NextNProgress
         color="#fff"

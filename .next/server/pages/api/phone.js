@@ -120,7 +120,7 @@ const updateSitemap = (number)=>{
     const d = JSON.parse(json);
     d.urlset.url.push({
         loc: {
-            _text: `https://phonebookup.com/number/${number}`
+            _text: `https://realcup.co.kr/number/${number}`
         },
         lastmod: {
             _text: external_moment_default()().format("YYYY-MM-DD")

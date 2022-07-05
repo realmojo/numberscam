@@ -13,7 +13,7 @@ const updateSitemap = (number) => {
 
   d.urlset.url.push({
     loc: {
-      _text: `https://phonebookup.com/number/${number}`,
+      _text: `https://realcup.co.kr/number/${number}`,
     },
     lastmod: { _text: moment().format("YYYY-MM-DD") },
     priority: { _text: "1.0" },

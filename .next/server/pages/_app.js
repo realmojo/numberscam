@@ -92,6 +92,11 @@ function MyApp({ Component , pageProps  }) {
                         dangerouslySetInnerHTML: {
                             __html: JSON.stringify(schemaData)
                         }
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("script", {
+                        async: true,
+                        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9130836798889522",
+                        crossOrigin: "anonymous"
                     })
                 ]
             }),
