@@ -12,13 +12,6 @@ import Head from "next/head";
 const SkeletonComponent = () => {
   return (
     <>
-      <AdSense.Google
-        style={{ display: "block" }}
-        client="ca-pub-9130836798889522"
-        slot="7832304740"
-        format="auto"
-        responsive="true"
-      />
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => (
         <Col
           key={item}
