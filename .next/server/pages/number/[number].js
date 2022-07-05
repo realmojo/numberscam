@@ -32,6 +32,9 @@ var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_)
 // EXTERNAL MODULE: external "moment"
 var external_moment_ = __webpack_require__(2245);
 var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment_);
+// EXTERNAL MODULE: external "react-adsense"
+var external_react_adsense_ = __webpack_require__(6348);
+var external_react_adsense_default = /*#__PURE__*/__webpack_require__.n(external_react_adsense_);
 // EXTERNAL MODULE: external "antd"
 var external_antd_ = __webpack_require__(5725);
 // EXTERNAL MODULE: external "moment/locale/ko"
@@ -168,6 +171,7 @@ const Recently = ({ number  })=>{
 // EXTERNAL MODULE: ./components/Header.js
 var Header = __webpack_require__(292);
 ;// CONCATENATED MODULE: ./pages/number/[number].js
+
 
 
 
@@ -314,6 +318,15 @@ const NumberPage = ({ item: item1 , commentItems  })=>{
                             /*#__PURE__*/ jsx_runtime_.jsx(Paragraph, {
                                 className: "text-right text-gray-400",
                                 children: created
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx((external_react_adsense_default()).Google, {
+                                style: {
+                                    display: "block"
+                                },
+                                client: "ca-pub-9130836798889522",
+                                slot: "7832304740",
+                                format: "auto",
+                                responsive: "true"
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("p", {
                                 className: "content-wrap",
@@ -601,6 +614,13 @@ module.exports = require("next/router");
 /***/ ((module) => {
 
 module.exports = require("react");
+
+/***/ }),
+
+/***/ 6348:
+/***/ ((module) => {
+
+module.exports = require("react-adsense");
 
 /***/ }),
 

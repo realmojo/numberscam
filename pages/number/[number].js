@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import axios from "axios";
 import moment from "moment";
+import AdSense from "react-adsense";
 import { Row, Col, Form, Input, Button, Divider, Typography } from "antd";
 const { Title, Paragraph } = Typography;
 import { Comments } from "../../components/Comment";
@@ -113,6 +114,13 @@ export const NumberPage = ({ item, commentItems }) => {
           <Title>{getTitle(number)}</Title>
           <Divider style={{ margin: "4px 0" }} />
           <Paragraph className="text-right text-gray-400">{created}</Paragraph>
+          <AdSense.Google
+            style={{ display: "block" }}
+            client="ca-pub-9130836798889522"
+            slot="7832304740"
+            format="auto"
+            responsive="true"
+          />
           <p className="content-wrap">
             {comments[0] !== undefined
               ? comments[0].message
