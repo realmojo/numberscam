@@ -154,6 +154,13 @@ export const NumberPage = ({ item, commentItems }) => {
             </Input.Group>
           </Form.Item>
           {isComplete && <div className="ml-2">등록이 완료되었습니다.</div>}
+          <AdSense.Google
+            style={{ display: "block" }}
+            client="ca-pub-9130836798889522"
+            slot="2634165992"
+            format="auto"
+            responsive="true"
+          />
           {comments.map((item, index) => (
             <Comments index={index} key={index} item={item} />
           ))}
