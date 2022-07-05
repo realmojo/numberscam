@@ -171,6 +171,13 @@ export const NumberPage = ({ item, commentItems }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
+          <AdSense.Google
+            style={{ display: "block" }}
+            client="ca-pub-9130836798889522"
+            slot="3419746008"
+            format="auto"
+            responsive="true"
+          />
           <Recently number={number} />
         </Col>
       </Row>
