@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import axios from "axios";
 import moment from "moment";
@@ -17,6 +17,10 @@ export const NumberPage = ({ item, commentItems }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [comments, setComments] = useState(commentItems);
+
+  useEffect(() => {
+    setComments(commentItems);
+  }, [commentItems]);
   const schemaData = {
     "@context": "http://schema.org",
     "@type": "Organization",

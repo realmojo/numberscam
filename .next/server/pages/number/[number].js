@@ -190,6 +190,11 @@ const NumberPage = ({ item: item1 , commentItems  })=>{
     const { 0: isLoading , 1: setIsLoading  } = (0,external_react_.useState)(false);
     const { 0: isComplete , 1: setIsComplete  } = (0,external_react_.useState)(false);
     const { 0: comments , 1: setComments  } = (0,external_react_.useState)(commentItems);
+    (0,external_react_.useEffect)(()=>{
+        setComments(commentItems);
+    }, [
+        commentItems
+    ]);
     const schemaData = {
         "@context": "http://schema.org",
         "@type": "Organization",
@@ -380,6 +385,15 @@ const NumberPage = ({ item: item1 , commentItems  })=>{
                                 className: "ml-2",
                                 children: "\uB4F1\uB85D\uC774 \uC644\uB8CC\uB418\uC5C8\uC2B5\uB2C8\uB2E4."
                             }),
+                            /*#__PURE__*/ jsx_runtime_.jsx((external_react_adsense_default()).Google, {
+                                style: {
+                                    display: "block"
+                                },
+                                client: "ca-pub-9130836798889522",
+                                slot: "2634165992",
+                                format: "auto",
+                                responsive: "true"
+                            }),
                             comments.map((item, index)=>/*#__PURE__*/ jsx_runtime_.jsx(Comments, {
                                     index: index,
                                     item: item
@@ -387,7 +401,7 @@ const NumberPage = ({ item: item1 , commentItems  })=>{
                             )
                         ]
                     }),
-                    /*#__PURE__*/ jsx_runtime_.jsx(external_antd_.Col, {
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)(external_antd_.Col, {
                         className: "px-4",
                         xs: {
                             span: 24
@@ -398,9 +412,20 @@ const NumberPage = ({ item: item1 , commentItems  })=>{
                         lg: {
                             span: 8
                         },
-                        children: /*#__PURE__*/ jsx_runtime_.jsx(Recently, {
-                            number: number1
-                        })
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx((external_react_adsense_default()).Google, {
+                                style: {
+                                    display: "block"
+                                },
+                                client: "ca-pub-9130836798889522",
+                                slot: "3419746008",
+                                format: "auto",
+                                responsive: "true"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx(Recently, {
+                                number: number1
+                            })
+                        ]
                     })
                 ]
             })
