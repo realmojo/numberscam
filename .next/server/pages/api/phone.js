@@ -1,221 +1,112 @@
 "use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 (() => {
 var exports = {};
-exports.id = 932;
-exports.ids = [932];
+exports.id = "pages/api/phone";
+exports.ids = ["pages/api/phone"];
 exports.modules = {
 
-/***/ 2245:
+/***/ "googleapis":
+/*!*****************************!*\
+  !*** external "googleapis" ***!
+  \*****************************/
+/***/ ((module) => {
+
+module.exports = require("googleapis");
+
+/***/ }),
+
+/***/ "moment":
+/*!*************************!*\
+  !*** external "moment" ***!
+  \*************************/
 /***/ ((module) => {
 
 module.exports = require("moment");
 
 /***/ }),
 
-/***/ 1185:
+/***/ "mongoose":
+/*!***************************!*\
+  !*** external "mongoose" ***!
+  \***************************/
 /***/ ((module) => {
 
 module.exports = require("mongoose");
 
 /***/ }),
 
-/***/ 1145:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "request":
+/*!**************************!*\
+  !*** external "request" ***!
+  \**************************/
+/***/ ((module) => {
 
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1185);
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2245);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-
-
-const PhoneSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0__.Schema({
-    number: {
-        type: String,
-        require: true,
-        index: {
-            unique: true
-        }
-    },
-    content: {
-        type: String,
-        default: ""
-    },
-    userId: {
-        type: String,
-        default: ""
-    },
-    ip: {
-        type: String,
-        default: ""
-    },
-    viewCount: {
-        type: Number,
-        default: 0
-    },
-    spamCount: {
-        type: Number,
-        default: 0
-    },
-    safeCount: {
-        type: Number,
-        default: 0
-    },
-    isDelete: {
-        type: Boolean,
-        default: false
-    },
-    created: {
-        type: String,
-        default: moment__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD HH:mm:ss")
-    },
-    updated: {
-        type: String,
-        default: moment__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD HH:mm:ss")
-    }
-});
-const Phone = mongoose__WEBPACK_IMPORTED_MODULE_0__.models.Phone || (0,mongoose__WEBPACK_IMPORTED_MODULE_0__.model)("Phone", PhoneSchema);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Phone);
-
+module.exports = require("request");
 
 /***/ }),
 
-/***/ 5755:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "xml-js":
+/*!*************************!*\
+  !*** external "xml-js" ***!
+  \*************************/
+/***/ ((module) => {
 
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ phone)
-});
-
-// EXTERNAL MODULE: ./lib/mongodb.js
-var mongodb = __webpack_require__(6198);
-// EXTERNAL MODULE: ./models/Phone.js
-var Phone = __webpack_require__(1145);
-;// CONCATENATED MODULE: external "fs"
-const external_fs_namespaceObject = require("fs");
-var external_fs_default = /*#__PURE__*/__webpack_require__.n(external_fs_namespaceObject);
-;// CONCATENATED MODULE: external "xml-js"
-const external_xml_js_namespaceObject = require("xml-js");
-var external_xml_js_default = /*#__PURE__*/__webpack_require__.n(external_xml_js_namespaceObject);
-// EXTERNAL MODULE: external "moment"
-var external_moment_ = __webpack_require__(2245);
-var external_moment_default = /*#__PURE__*/__webpack_require__.n(external_moment_);
-;// CONCATENATED MODULE: external "axios"
-const external_axios_namespaceObject = require("axios");
-var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_namespaceObject);
-;// CONCATENATED MODULE: ./pages/api/phone/index.js
-
-
-
-
-
-
-const key = __webpack_require__(1195);
-const jwtClient = new google.auth.JWT(key.client_email, null, key.private_key, [
-    "https://www.googleapis.com/auth/indexing"
-], null);
-const updateSitemap = (number)=>{
-    console.log("sitemap add number: ", number);
-    const p =  true ? "/opt" : 0;
-    const f =  true ? "/phonebookup/public" : 0;
-    var json = external_fs_default().readFileSync(`${p}/sitemap.json`, "utf8");
-    const d = JSON.parse(json);
-    d.urlset.url.push({
-        loc: {
-            _text: `https://realcup.co.kr/number/${number}`
-        },
-        lastmod: {
-            _text: external_moment_default()().format("YYYY-MM-DD")
-        },
-        priority: {
-            _text: "1.0"
-        }
-    });
-    var options = {
-        compact: true,
-        ignoreComment: true,
-        spaces: 2
-    };
-    var result = external_xml_js_default().json2xml(JSON.stringify(d), options);
-    external_fs_default().writeFile(`${p}/sitemap.json`, JSON.stringify(d), function(err) {
-        if (err !== null) {
-            console.log("sitemap fail");
-        }
-    });
-    external_fs_default().writeFile(`${p}${f}/sitemap.xml`, result, function(err) {
-        if (err !== null) {
-            console.log("sitemap fail");
-        }
-    });
-};
-const googleIndexingApi = (number)=>{
-    jwtClient.authorize(function(err1, tokens) {
-        if (err1) {
-            console.log(err1);
-            return;
-        }
-        let params = {
-            auth: {
-                bearer: tokens.access_token
-            },
-            json: {
-                url: `https://realcup.co.kr/number/${number}`,
-                type: "URL_UPDATED"
-            }
-        };
-        external_axios_default().post("https://indexing.googleapis.com/v3/urlNotifications:publish", params, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(()=>{
-            console.log(`number indexing success!`);
-        }).catch((err)=>{
-            console.log(err);
-        });
-    });
-};
-const handler = async (req, res)=>{
-    const { method  } = req;
-    let { number , ip  } = req.body;
-    if (!number) {
-        throw "no number";
-    }
-    try {
-        switch(method){
-            case "POST":
-                // 숫자만 들어가게끔 함.
-                number = number.replace(/[^0-9]/g, "");
-                const params = {
-                    number,
-                    ip
-                };
-                const newPhone = new Phone/* default */.Z(params);
-                const item = await newPhone.save();
-                // sitemap 등록
-                updateSitemap(item.number);
-                // googleindexing 등록
-                googleIndexingApi(item.number);
-                res.status(200).json(item || {});
-                break;
-        }
-    } catch (e) {
-        res.status(500).json({
-            message: e
-        });
-    }
-};
-/* harmony default export */ const phone = ((0,mongodb/* default */.Z)(handler));
-
+module.exports = require("xml-js");
 
 /***/ }),
 
-/***/ 1195:
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/***/ ((module) => {
+
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ "(api)/./lib/mongodb.js":
+/*!************************!*\
+  !*** ./lib/mongodb.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"dbInitConnect\": () => (/* binding */ dbInitConnect),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mongoose */ \"mongoose\");\n/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);\n\nconst MONGODB_URI = process.env.MONGODB_URI;\n// if (!MONGODB_URI) {\n//   console.log(typeof MONGODB_URI);\n//   throw new Error(\n//     \"Please define the MONGODB_URI environment variable inside .env.local\"\n//   );\n// }\n/**\n * Global is used here to maintain a cached connection across hot reloads\n * in development. This prevents connections growing exponentially\n * during API Route usage.\n */ let cached = global.mongoose;\nif (!cached) {\n    cached = global.mongoose = {\n        conn: null,\n        promise: null\n    };\n}\nconst dbInitConnect = async ()=>{\n    if (!cached.promise) {\n        cached.promise = mongoose__WEBPACK_IMPORTED_MODULE_0___default().connect(MONGODB_URI).then((mongoose1)=>{\n            return mongoose1;\n        });\n        cached.conn = await cached.promise;\n    }\n};\nconst dbConnect = (handler)=>async (req, res)=>{\n        if (cached.conn) {\n            return handler(req, res);\n        }\n        if (!cached.promise) {\n            cached.promise = mongoose__WEBPACK_IMPORTED_MODULE_0___default().connect(MONGODB_URI).then((mongoose2)=>{\n                return mongoose2;\n            });\n        }\n        cached.conn = await cached.promise;\n        return handler(req, res);\n    }\n;\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dbConnect);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9saWIvbW9uZ29kYi5qcy5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQWdDO0FBRWhDLE1BQU1DLFdBQVcsR0FBR0MsT0FBTyxDQUFDQyxHQUFHLENBQUNGLFdBQVc7QUFDM0Msc0JBQXNCO0FBQ3RCLHFDQUFxQztBQUNyQyxxQkFBcUI7QUFDckIsNkVBQTZFO0FBQzdFLE9BQU87QUFDUCxJQUFJO0FBRUo7Ozs7R0FJRyxDQUNILElBQUlHLE1BQU0sR0FBR0MsTUFBTSxDQUFDTCxRQUFRO0FBRTVCLElBQUksQ0FBQ0ksTUFBTSxFQUFFO0lBQ1hBLE1BQU0sR0FBR0MsTUFBTSxDQUFDTCxRQUFRLEdBQUc7UUFBRU0sSUFBSSxFQUFFLElBQUk7UUFBRUMsT0FBTyxFQUFFLElBQUk7S0FBRSxDQUFDO0NBQzFEO0FBRU0sTUFBTUMsYUFBYSxHQUFHLFVBQVk7SUFDdkMsSUFBSSxDQUFDSixNQUFNLENBQUNHLE9BQU8sRUFBRTtRQUNuQkgsTUFBTSxDQUFDRyxPQUFPLEdBQUdQLHVEQUFnQixDQUFDQyxXQUFXLENBQUMsQ0FBQ1MsSUFBSSxDQUFDLENBQUNWLFNBQVEsR0FBSztZQUNoRSxPQUFPQSxTQUFRLENBQUM7U0FDakIsQ0FBQyxDQUFDO1FBQ0hJLE1BQU0sQ0FBQ0UsSUFBSSxHQUFHLE1BQU1GLE1BQU0sQ0FBQ0csT0FBTyxDQUFDO0tBQ3BDO0NBQ0YsQ0FBQztBQUVGLE1BQU1JLFNBQVMsR0FBRyxDQUFDQyxPQUFPLEdBQUssT0FBT0MsR0FBRyxFQUFFQyxHQUFHLEdBQUs7UUFDakQsSUFBSVYsTUFBTSxDQUFDRSxJQUFJLEVBQUU7WUFDZixPQUFPTSxPQUFPLENBQUNDLEdBQUcsRUFBRUMsR0FBRyxDQUFDLENBQUM7U0FDMUI7UUFFRCxJQUFJLENBQUNWLE1BQU0sQ0FBQ0csT0FBTyxFQUFFO1lBQ25CSCxNQUFNLENBQUNHLE9BQU8sR0FBR1AsdURBQWdCLENBQUNDLFdBQVcsQ0FBQyxDQUFDUyxJQUFJLENBQUMsQ0FBQ1YsU0FBUSxHQUFLO2dCQUNoRSxPQUFPQSxTQUFRLENBQUM7YUFDakIsQ0FBQyxDQUFDO1NBQ0o7UUFFREksTUFBTSxDQUFDRSxJQUFJLEdBQUcsTUFBTUYsTUFBTSxDQUFDRyxPQUFPLENBQUM7UUFDbkMsT0FBT0ssT0FBTyxDQUFDQyxHQUFHLEVBQUVDLEdBQUcsQ0FBQyxDQUFDO0tBQzFCO0FBQUM7QUFFRixpRUFBZUgsU0FBUyxFQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcGhvbmVib29rdXAvLi9saWIvbW9uZ29kYi5qcz9kOTIwIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBtb25nb29zZSBmcm9tIFwibW9uZ29vc2VcIjtcblxuY29uc3QgTU9OR09EQl9VUkkgPSBwcm9jZXNzLmVudi5NT05HT0RCX1VSSTtcbi8vIGlmICghTU9OR09EQl9VUkkpIHtcbi8vICAgY29uc29sZS5sb2codHlwZW9mIE1PTkdPREJfVVJJKTtcbi8vICAgdGhyb3cgbmV3IEVycm9yKFxuLy8gICAgIFwiUGxlYXNlIGRlZmluZSB0aGUgTU9OR09EQl9VUkkgZW52aXJvbm1lbnQgdmFyaWFibGUgaW5zaWRlIC5lbnYubG9jYWxcIlxuLy8gICApO1xuLy8gfVxuXG4vKipcbiAqIEdsb2JhbCBpcyB1c2VkIGhlcmUgdG8gbWFpbnRhaW4gYSBjYWNoZWQgY29ubmVjdGlvbiBhY3Jvc3MgaG90IHJlbG9hZHNcbiAqIGluIGRldmVsb3BtZW50LiBUaGlzIHByZXZlbnRzIGNvbm5lY3Rpb25zIGdyb3dpbmcgZXhwb25lbnRpYWxseVxuICogZHVyaW5nIEFQSSBSb3V0ZSB1c2FnZS5cbiAqL1xubGV0IGNhY2hlZCA9IGdsb2JhbC5tb25nb29zZTtcblxuaWYgKCFjYWNoZWQpIHtcbiAgY2FjaGVkID0gZ2xvYmFsLm1vbmdvb3NlID0geyBjb25uOiBudWxsLCBwcm9taXNlOiBudWxsIH07XG59XG5cbmV4cG9ydCBjb25zdCBkYkluaXRDb25uZWN0ID0gYXN5bmMgKCkgPT4ge1xuICBpZiAoIWNhY2hlZC5wcm9taXNlKSB7XG4gICAgY2FjaGVkLnByb21pc2UgPSBtb25nb29zZS5jb25uZWN0KE1PTkdPREJfVVJJKS50aGVuKChtb25nb29zZSkgPT4ge1xuICAgICAgcmV0dXJuIG1vbmdvb3NlO1xuICAgIH0pO1xuICAgIGNhY2hlZC5jb25uID0gYXdhaXQgY2FjaGVkLnByb21pc2U7XG4gIH1cbn07XG5cbmNvbnN0IGRiQ29ubmVjdCA9IChoYW5kbGVyKSA9PiBhc3luYyAocmVxLCByZXMpID0+IHtcbiAgaWYgKGNhY2hlZC5jb25uKSB7XG4gICAgcmV0dXJuIGhhbmRsZXIocmVxLCByZXMpO1xuICB9XG5cbiAgaWYgKCFjYWNoZWQucHJvbWlzZSkge1xuICAgIGNhY2hlZC5wcm9taXNlID0gbW9uZ29vc2UuY29ubmVjdChNT05HT0RCX1VSSSkudGhlbigobW9uZ29vc2UpID0+IHtcbiAgICAgIHJldHVybiBtb25nb29zZTtcbiAgICB9KTtcbiAgfVxuXG4gIGNhY2hlZC5jb25uID0gYXdhaXQgY2FjaGVkLnByb21pc2U7XG4gIHJldHVybiBoYW5kbGVyKHJlcSwgcmVzKTtcbn07XG5cbmV4cG9ydCBkZWZhdWx0IGRiQ29ubmVjdDtcbiJdLCJuYW1lcyI6WyJtb25nb29zZSIsIk1PTkdPREJfVVJJIiwicHJvY2VzcyIsImVudiIsImNhY2hlZCIsImdsb2JhbCIsImNvbm4iLCJwcm9taXNlIiwiZGJJbml0Q29ubmVjdCIsImNvbm5lY3QiLCJ0aGVuIiwiZGJDb25uZWN0IiwiaGFuZGxlciIsInJlcSIsInJlcyJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(api)/./lib/mongodb.js\n");
+
+/***/ }),
+
+/***/ "(api)/./models/Phone.js":
+/*!*************************!*\
+  !*** ./models/Phone.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mongoose */ \"mongoose\");\n/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ \"moment\");\n/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);\n\n\nconst PhoneSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0__.Schema({\n    number: {\n        type: String,\n        require: true,\n        index: {\n            unique: true\n        }\n    },\n    content: {\n        type: String,\n        default: \"\"\n    },\n    userId: {\n        type: String,\n        default: \"\"\n    },\n    ip: {\n        type: String,\n        default: \"\"\n    },\n    viewCount: {\n        type: Number,\n        default: 0\n    },\n    spamCount: {\n        type: Number,\n        default: 0\n    },\n    safeCount: {\n        type: Number,\n        default: 0\n    },\n    isDelete: {\n        type: Boolean,\n        default: false\n    },\n    created: {\n        type: String,\n        default: moment__WEBPACK_IMPORTED_MODULE_1___default()().format(\"YYYY-MM-DD HH:mm:ss\")\n    },\n    updated: {\n        type: String,\n        default: moment__WEBPACK_IMPORTED_MODULE_1___default()().format(\"YYYY-MM-DD HH:mm:ss\")\n    }\n});\nconst Phone = mongoose__WEBPACK_IMPORTED_MODULE_0__.models.Phone || (0,mongoose__WEBPACK_IMPORTED_MODULE_0__.model)(\"Phone\", PhoneSchema);\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Phone);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9tb2RlbHMvUGhvbmUuanMuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7QUFBaUQ7QUFDckI7QUFFNUIsTUFBTUksV0FBVyxHQUFHLElBQUlKLDRDQUFNLENBQUM7SUFDN0JLLE1BQU0sRUFBRTtRQUNOQyxJQUFJLEVBQUVDLE1BQU07UUFDWkMsT0FBTyxFQUFFLElBQUk7UUFDYkMsS0FBSyxFQUFFO1lBQUVDLE1BQU0sRUFBRSxJQUFJO1NBQUU7S0FDeEI7SUFDREMsT0FBTyxFQUFFO1FBQUVMLElBQUksRUFBRUMsTUFBTTtRQUFFSyxPQUFPLEVBQUUsRUFBRTtLQUFFO0lBQ3RDQyxNQUFNLEVBQUU7UUFBRVAsSUFBSSxFQUFFQyxNQUFNO1FBQUVLLE9BQU8sRUFBRSxFQUFFO0tBQUU7SUFDckNFLEVBQUUsRUFBRTtRQUFFUixJQUFJLEVBQUVDLE1BQU07UUFBRUssT0FBTyxFQUFFLEVBQUU7S0FBRTtJQUNqQ0csU0FBUyxFQUFFO1FBQUVULElBQUksRUFBRVUsTUFBTTtRQUFFSixPQUFPLEVBQUUsQ0FBQztLQUFFO0lBQ3ZDSyxTQUFTLEVBQUU7UUFBRVgsSUFBSSxFQUFFVSxNQUFNO1FBQUVKLE9BQU8sRUFBRSxDQUFDO0tBQUU7SUFDdkNNLFNBQVMsRUFBRTtRQUFFWixJQUFJLEVBQUVVLE1BQU07UUFBRUosT0FBTyxFQUFFLENBQUM7S0FBRTtJQUN2Q08sUUFBUSxFQUFFO1FBQUViLElBQUksRUFBRWMsT0FBTztRQUFFUixPQUFPLEVBQUUsS0FBSztLQUFFO0lBQzNDUyxPQUFPLEVBQUU7UUFBRWYsSUFBSSxFQUFFQyxNQUFNO1FBQUVLLE9BQU8sRUFBRVQsNkNBQU0sRUFBRSxDQUFDbUIsTUFBTSxDQUFDLHFCQUFxQixDQUFDO0tBQUU7SUFDMUVDLE9BQU8sRUFBRTtRQUFFakIsSUFBSSxFQUFFQyxNQUFNO1FBQUVLLE9BQU8sRUFBRVQsNkNBQU0sRUFBRSxDQUFDbUIsTUFBTSxDQUFDLHFCQUFxQixDQUFDO0tBQUU7Q0FDM0UsQ0FBQztBQUVGLE1BQU1FLEtBQUssR0FBR3ZCLGtEQUFZLElBQUlDLCtDQUFLLENBQUMsT0FBTyxFQUFFRSxXQUFXLENBQUM7QUFDekQsaUVBQWVvQixLQUFLLEVBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9waG9uZWJvb2t1cC8uL21vZGVscy9QaG9uZS5qcz84NTRjIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFNjaGVtYSwgbW9kZWxzLCBtb2RlbCB9IGZyb20gXCJtb25nb29zZVwiO1xuaW1wb3J0IG1vbWVudCBmcm9tIFwibW9tZW50XCI7XG5cbmNvbnN0IFBob25lU2NoZW1hID0gbmV3IFNjaGVtYSh7XG4gIG51bWJlcjoge1xuICAgIHR5cGU6IFN0cmluZyxcbiAgICByZXF1aXJlOiB0cnVlLFxuICAgIGluZGV4OiB7IHVuaXF1ZTogdHJ1ZSB9LFxuICB9LFxuICBjb250ZW50OiB7IHR5cGU6IFN0cmluZywgZGVmYXVsdDogXCJcIiB9LFxuICB1c2VySWQ6IHsgdHlwZTogU3RyaW5nLCBkZWZhdWx0OiBcIlwiIH0sXG4gIGlwOiB7IHR5cGU6IFN0cmluZywgZGVmYXVsdDogXCJcIiB9LFxuICB2aWV3Q291bnQ6IHsgdHlwZTogTnVtYmVyLCBkZWZhdWx0OiAwIH0sXG4gIHNwYW1Db3VudDogeyB0eXBlOiBOdW1iZXIsIGRlZmF1bHQ6IDAgfSxcbiAgc2FmZUNvdW50OiB7IHR5cGU6IE51bWJlciwgZGVmYXVsdDogMCB9LFxuICBpc0RlbGV0ZTogeyB0eXBlOiBCb29sZWFuLCBkZWZhdWx0OiBmYWxzZSB9LFxuICBjcmVhdGVkOiB7IHR5cGU6IFN0cmluZywgZGVmYXVsdDogbW9tZW50KCkuZm9ybWF0KFwiWVlZWS1NTS1ERCBISDptbTpzc1wiKSB9LFxuICB1cGRhdGVkOiB7IHR5cGU6IFN0cmluZywgZGVmYXVsdDogbW9tZW50KCkuZm9ybWF0KFwiWVlZWS1NTS1ERCBISDptbTpzc1wiKSB9LFxufSk7XG5cbmNvbnN0IFBob25lID0gbW9kZWxzLlBob25lIHx8IG1vZGVsKFwiUGhvbmVcIiwgUGhvbmVTY2hlbWEpO1xuZXhwb3J0IGRlZmF1bHQgUGhvbmU7XG4iXSwibmFtZXMiOlsiU2NoZW1hIiwibW9kZWxzIiwibW9kZWwiLCJtb21lbnQiLCJQaG9uZVNjaGVtYSIsIm51bWJlciIsInR5cGUiLCJTdHJpbmciLCJyZXF1aXJlIiwiaW5kZXgiLCJ1bmlxdWUiLCJjb250ZW50IiwiZGVmYXVsdCIsInVzZXJJZCIsImlwIiwidmlld0NvdW50IiwiTnVtYmVyIiwic3BhbUNvdW50Iiwic2FmZUNvdW50IiwiaXNEZWxldGUiLCJCb29sZWFuIiwiY3JlYXRlZCIsImZvcm1hdCIsInVwZGF0ZWQiLCJQaG9uZSJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(api)/./models/Phone.js\n");
+
+/***/ }),
+
+/***/ "(api)/./pages/api/phone/index.js":
+/*!**********************************!*\
+  !*** ./pages/api/phone/index.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _lib_mongodb__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/mongodb */ \"(api)/./lib/mongodb.js\");\n/* harmony import */ var _models_Phone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../models/Phone */ \"(api)/./models/Phone.js\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! fs */ \"fs\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var xml_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! xml-js */ \"xml-js\");\n/* harmony import */ var xml_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(xml_js__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ \"moment\");\n/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var request__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! request */ \"request\");\n/* harmony import */ var request__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(request__WEBPACK_IMPORTED_MODULE_5__);\n\n\n\n\n\n\nvar { google  } = __webpack_require__(/*! googleapis */ \"googleapis\");\nconst key = __webpack_require__(/*! ../indexing.json */ \"(api)/./pages/api/indexing.json\");\nconst jwtClient = new google.auth.JWT(key.client_email, null, key.private_key, [\n    \"https://www.googleapis.com/auth/indexing\"\n], null);\njwtClient.authorize(function(err, tokens) {\n    if (err) {\n        console.log(err);\n        return;\n    }\n    let options = {\n        url: \"https://indexing.googleapis.com/v3/urlNotifications:publish\",\n        method: \"POST\",\n        // Your options, which must include the Content-Type and auth headers\n        headers: {\n            \"Content-Type\": \"application/json\"\n        },\n        auth: {\n            bearer: tokens.access_token\n        },\n        // Define contents here. The structure of the content is described in the next step.\n        json: {\n            url: \"https://realcup.co.kr/number/12344321\",\n            type: \"URL_UPDATED\"\n        }\n    };\n    request__WEBPACK_IMPORTED_MODULE_5___default()(options, function(error, response, body) {\n        // Handle the response\n        console.log(body);\n    });\n});\nconst updateSitemap = (number)=>{\n    console.log(\"sitemap add number: \", number);\n    const p =  false ? 0 : \".\";\n    const f =  false ? 0 : \"\";\n    var json = fs__WEBPACK_IMPORTED_MODULE_2___default().readFileSync(`${p}/sitemap.json`, \"utf8\");\n    const d = JSON.parse(json);\n    d.urlset.url.push({\n        loc: {\n            _text: `https://realcup.co.kr/number/${number}`\n        },\n        lastmod: {\n            _text: moment__WEBPACK_IMPORTED_MODULE_4___default()().format(\"YYYY-MM-DD\")\n        },\n        priority: {\n            _text: \"1.0\"\n        }\n    });\n    var options = {\n        compact: true,\n        ignoreComment: true,\n        spaces: 2\n    };\n    var result = xml_js__WEBPACK_IMPORTED_MODULE_3___default().json2xml(JSON.stringify(d), options);\n    fs__WEBPACK_IMPORTED_MODULE_2___default().writeFile(`${p}/sitemap.json`, JSON.stringify(d), function(err) {\n        if (err !== null) {\n            console.log(\"sitemap fail\");\n        }\n    });\n    fs__WEBPACK_IMPORTED_MODULE_2___default().writeFile(`${p}${f}/sitemap.xml`, result, function(err) {\n        if (err !== null) {\n            console.log(\"sitemap fail\");\n        }\n    });\n};\nconst googleIndexingApi = (number)=>{\n    jwtClient.authorize(function(err1, tokens) {\n        if (err1) {\n            console.log(err1);\n            return;\n        }\n        let data = {\n            auth: {\n                bearer: tokens.access_token\n            },\n            json: {\n                url: `https://realcup.co.kr/number/${number}`,\n                type: \"URL_UPDATED\"\n            }\n        };\n        axios.post(\"https://indexing.googleapis.com/v3/urlNotifications:publish\", data, {\n            headers: {\n                \"Content-Type\": \"application/json\"\n            }\n        }).then(()=>{\n            console.log(`number indexing success!`);\n        }).catch((err)=>{\n            console.log(\"number indexing error\");\n            console.log(err);\n        });\n    });\n};\nconst handler = async (req, res)=>{\n    const { method  } = req;\n    let { number , ip  } = req.body;\n    if (!number) {\n        throw \"no number\";\n    }\n    try {\n        switch(method){\n            case \"GET\":\n                res.status(200).json(\"hello\");\n                break;\n            case \"POST\":\n                // 숫자만 들어가게끔 함.\n                number = number.replace(/[^0-9]/g, \"\");\n                const params = {\n                    number,\n                    ip\n                };\n                const newPhone = new _models_Phone__WEBPACK_IMPORTED_MODULE_1__[\"default\"](params);\n                const item = await newPhone.save();\n                // sitemap 등록\n                updateSitemap(item.number);\n                // googleindexing 등록\n                googleIndexingApi(item.number);\n                res.status(200).json(item || {});\n                break;\n        }\n    } catch (e) {\n        res.status(500).json({\n            message: e\n        });\n    }\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_lib_mongodb__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(handler));\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,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QUU7UUFDVlIsR0FBRyxDQUFDRSxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUN0QyxJQUFJLENBQUM7WUFBRTZDLE9BQU8sRUFBRUQsQ0FBQztTQUFFLENBQUMsQ0FBQztLQUN0QztDQUNGO0FBRUQsaUVBQWVyRSx3REFBUyxDQUFDMkQsT0FBTyxDQUFDLEVBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9waG9uZWJvb2t1cC8uL3BhZ2VzL2FwaS9waG9uZS9pbmRleC5qcz9hNWI2Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBkYkNvbm5lY3QgZnJvbSBcIi4uLy4uLy4uL2xpYi9tb25nb2RiXCI7XG5pbXBvcnQgUGhvbmUgZnJvbSBcIi4uLy4uLy4uL21vZGVscy9QaG9uZVwiO1xuaW1wb3J0IGZzIGZyb20gXCJmc1wiO1xuaW1wb3J0IGNvbnZlcnQgZnJvbSBcInhtbC1qc1wiO1xuaW1wb3J0IG1vbWVudCBmcm9tIFwibW9tZW50XCI7XG5pbXBvcnQgcmVxdWVzdCBmcm9tIFwicmVxdWVzdFwiO1xudmFyIHsgZ29vZ2xlIH0gPSByZXF1aXJlKFwiZ29vZ2xlYXBpc1wiKTtcbmNvbnN0IGtleSA9IHJlcXVpcmUoXCIuLi9pbmRleGluZy5qc29uXCIpO1xuY29uc3Qgand0Q2xpZW50ID0gbmV3IGdvb2dsZS5hdXRoLkpXVChcbiAga2V5LmNsaWVudF9lbWFpbCxcbiAgbnVsbCxcbiAga2V5LnByaXZhdGVfa2V5LFxuICBbXCJodHRwczovL3d3dy5nb29nbGVhcGlzLmNvbS9hdXRoL2luZGV4aW5nXCJdLFxuICBudWxsXG4pO1xuXG5qd3RDbGllbnQuYXV0aG9yaXplKGZ1bmN0aW9uIChlcnIsIHRva2Vucykge1xuICBpZiAoZXJyKSB7XG4gICAgY29uc29sZS5sb2coZXJyKTtcbiAgICByZXR1cm47XG4gIH1cbiAgbGV0IG9wdGlvbnMgPSB7XG4gICAgdXJsOiBcImh0dHBzOi8vaW5kZXhpbmcuZ29vZ2xlYXBpcy5jb20vdjMvdXJsTm90aWZpY2F0aW9uczpwdWJsaXNoXCIsXG4gICAgbWV0aG9kOiBcIlBPU1RcIixcbiAgICAvLyBZb3VyIG9wdGlvbnMsIHdoaWNoIG11c3QgaW5jbHVkZSB0aGUgQ29udGVudC1UeXBlIGFuZCBhdXRoIGhlYWRlcnNcbiAgICBoZWFkZXJzOiB7XG4gICAgICBcIkNvbnRlbnQtVHlwZVwiOiBcImFwcGxpY2F0aW9uL2pzb25cIixcbiAgICB9LFxuICAgIGF1dGg6IHsgYmVhcmVyOiB0b2tlbnMuYWNjZXNzX3Rva2VuIH0sXG4gICAgLy8gRGVmaW5lIGNvbnRlbnRzIGhlcmUuIFRoZSBzdHJ1Y3R1cmUgb2YgdGhlIGNvbnRlbnQgaXMgZGVzY3JpYmVkIGluIHRoZSBuZXh0IHN0ZXAuXG4gICAganNvbjoge1xuICAgICAgdXJsOiBcImh0dHBzOi8vcmVhbGN1cC5jby5rci9udW1iZXIvMTIzNDQzMjFcIixcbiAgICAgIHR5cGU6IFwiVVJMX1VQREFURURcIixcbiAgICB9LFxuICB9O1xuICByZXF1ZXN0KG9wdGlvbnMsIGZ1bmN0aW9uIChlcnJvciwgcmVzcG9uc2UsIGJvZHkpIHtcbiAgICAvLyBIYW5kbGUgdGhlIHJlc3BvbnNlXG4gICAgY29uc29sZS5sb2coYm9keSk7XG4gIH0pO1xufSk7XG5cbmNvbnN0IHVwZGF0ZVNpdGVtYXAgPSAobnVtYmVyKSA9PiB7XG4gIGNvbnNvbGUubG9nKFwic2l0ZW1hcCBhZGQgbnVtYmVyOiBcIiwgbnVtYmVyKTtcbiAgY29uc3QgcCA9IHByb2Nlc3MuZW52Lk5PREVfRU5WID09PSBcInByb2R1Y3Rpb25cIiA/IFwiL29wdFwiIDogXCIuXCI7XG4gIGNvbnN0IGYgPSBwcm9jZXNzLmVudi5OT0RFX0VOViA9PT0gXCJwcm9kdWN0aW9uXCIgPyBcIi9waG9uZWJvb2t1cC9wdWJsaWNcIiA6IFwiXCI7XG4gIHZhciBqc29uID0gZnMucmVhZEZpbGVTeW5jKGAke3B9L3NpdGVtYXAuanNvbmAsIFwidXRmOFwiKTtcbiAgY29uc3QgZCA9IEpTT04ucGFyc2UoanNvbik7XG5cbiAgZC51cmxzZXQudXJsLnB1c2goe1xuICAgIGxvYzoge1xuICAgICAgX3RleHQ6IGBodHRwczovL3JlYWxjdXAuY28ua3IvbnVtYmVyLyR7bnVtYmVyfWAsXG4gICAgfSxcbiAgICBsYXN0bW9kOiB7IF90ZXh0OiBtb21lbnQoKS5mb3JtYXQoXCJZWVlZLU1NLUREXCIpIH0sXG4gICAgcHJpb3JpdHk6IHsgX3RleHQ6IFwiMS4wXCIgfSxcbiAgfSk7XG5cbiAgdmFyIG9wdGlvbnMgPSB7IGNvbXBhY3Q6IHRydWUsIGlnbm9yZUNvbW1lbnQ6IHRydWUsIHNwYWNlczogMiB9O1xuICB2YXIgcmVzdWx0ID0gY29udmVydC5qc29uMnhtbChKU09OLnN0cmluZ2lmeShkKSwgb3B0aW9ucyk7XG4gIGZzLndyaXRlRmlsZShgJHtwfS9zaXRlbWFwLmpzb25gLCBKU09OLnN0cmluZ2lmeShkKSwgZnVuY3Rpb24gKGVycikge1xuICAgIGlmIChlcnIgIT09IG51bGwpIHtcbiAgICAgIGNvbnNvbGUubG9nKFwic2l0ZW1hcCBmYWlsXCIpO1xuICAgIH1cbiAgfSk7XG4gIGZzLndyaXRlRmlsZShgJHtwfSR7Zn0vc2l0ZW1hcC54bWxgLCByZXN1bHQsIGZ1bmN0aW9uIChlcnIpIHtcbiAgICBpZiAoZXJyICE9PSBudWxsKSB7XG4gICAgICBjb25zb2xlLmxvZyhcInNpdGVtYXAgZmFpbFwiKTtcbiAgICB9XG4gIH0pO1xufTtcblxuY29uc3QgZ29vZ2xlSW5kZXhpbmdBcGkgPSAobnVtYmVyKSA9PiB7XG4gIGp3dENsaWVudC5hdXRob3JpemUoZnVuY3Rpb24gKGVyciwgdG9rZW5zKSB7XG4gICAgaWYgKGVycikge1xuICAgICAgY29uc29sZS5sb2coZXJyKTtcbiAgICAgIHJldHVybjtcbiAgICB9XG4gICAgbGV0IGRhdGEgPSB7XG4gICAgICBhdXRoOiB7IGJlYXJlcjogdG9rZW5zLmFjY2Vzc190b2tlbiB9LFxuICAgICAganNvbjoge1xuICAgICAgICB1cmw6IGBodHRwczovL3JlYWxjdXAuY28ua3IvbnVtYmVyLyR7bnVtYmVyfWAsXG4gICAgICAgIHR5cGU6IFwiVVJMX1VQREFURURcIixcbiAgICAgIH0sXG4gICAgfTtcblxuICAgIGF4aW9zXG4gICAgICAucG9zdChcbiAgICAgICAgXCJodHRwczovL2luZGV4aW5nLmdvb2dsZWFwaXMuY29tL3YzL3VybE5vdGlmaWNhdGlvbnM6cHVibGlzaFwiLFxuICAgICAgICBkYXRhLFxuICAgICAgICB7XG4gICAgICAgICAgaGVhZGVyczoge1xuICAgICAgICAgICAgXCJDb250ZW50LVR5cGVcIjogXCJhcHBsaWNhdGlvbi9qc29uXCIsXG4gICAgICAgICAgfSxcbiAgICAgICAgfVxuICAgICAgKVxuICAgICAgLnRoZW4oKCkgPT4ge1xuICAgICAgICBjb25zb2xlLmxvZyhgbnVtYmVyIGluZGV4aW5nIHN1Y2Nlc3MhYCk7XG4gICAgICB9KVxuICAgICAgLmNhdGNoKChlcnIpID0+IHtcbiAgICAgICAgY29uc29sZS5sb2coXCJudW1iZXIgaW5kZXhpbmcgZXJyb3JcIik7XG4gICAgICAgIGNvbnNvbGUubG9nKGVycik7XG4gICAgICB9KTtcbiAgfSk7XG59O1xuXG5jb25zdCBoYW5kbGVyID0gYXN5bmMgKHJlcSwgcmVzKSA9PiB7XG4gIGNvbnN0IHsgbWV0aG9kIH0gPSByZXE7XG4gIGxldCB7IG51bWJlciwgaXAgfSA9IHJlcS5ib2R5O1xuXG4gIGlmICghbnVtYmVyKSB7XG4gICAgdGhyb3cgXCJubyBudW1iZXJcIjtcbiAgfVxuICB0cnkge1xuICAgIHN3aXRjaCAobWV0aG9kKSB7XG4gICAgICBjYXNlIFwiR0VUXCI6XG4gICAgICAgIHJlcy5zdGF0dXMoMjAwKS5qc29uKFwiaGVsbG9cIik7XG4gICAgICAgIGJyZWFrO1xuICAgICAgY2FzZSBcIlBPU1RcIjpcbiAgICAgICAgLy8g7Iir7J6Q66eMIOuTpOyWtOqwgOqyjOuBlCDtlaguXG4gICAgICAgIG51bWJlciA9IG51bWJlci5yZXBsYWNlKC9bXjAtOV0vZywgXCJcIik7XG4gICAgICAgIGNvbnN0IHBhcmFtcyA9IHtcbiAgICAgICAgICBudW1iZXIsXG4gICAgICAgICAgaXAsXG4gICAgICAgIH07XG5cbiAgICAgICAgY29uc3QgbmV3UGhvbmUgPSBuZXcgUGhvbmUocGFyYW1zKTtcbiAgICAgICAgY29uc3QgaXRlbSA9IGF3YWl0IG5ld1Bob25lLnNhdmUoKTtcblxuICAgICAgICAvLyBzaXRlbWFwIOuTseuhnVxuICAgICAgICB1cGRhdGVTaXRlbWFwKGl0ZW0ubnVtYmVyKTtcblxuICAgICAgICAvLyBnb29nbGVpbmRleGluZyDrk7HroZ1cbiAgICAgICAgZ29vZ2xlSW5kZXhpbmdBcGkoaXRlbS5udW1iZXIpO1xuXG4gICAgICAgIHJlcy5zdGF0dXMoMjAwKS5qc29uKGl0ZW0gfHwge30pO1xuICAgICAgICBicmVhaztcbiAgICB9XG4gIH0gY2F0Y2ggKGUpIHtcbiAgICByZXMuc3RhdHVzKDUwMCkuanNvbih7IG1lc3NhZ2U6IGUgfSk7XG4gIH1cbn07XG5cbmV4cG9ydCBkZWZhdWx0IGRiQ29ubmVjdChoYW5kbGVyKTtcbiJdLCJuYW1lcyI6WyJkYkNvbm5lY3QiLCJQaG9uZSIsImZzIiwiY29udmVydCIsIm1vbWVudCIsInJlcXVlc3QiLCJnb29nbGUiLCJyZXF1aXJlIiwia2V5Iiwiand0Q2xpZW50IiwiYXV0aCIsIkpXVCIsImNsaWVudF9lbWFpbCIsInByaXZhdGVfa2V5IiwiYXV0aG9yaXplIiwiZXJyIiwidG9rZW5zIiwiY29uc29sZSIsImxvZyIsIm9wdGlvbnMiLCJ1cmwiLCJtZXRob2QiLCJoZWFkZXJzIiwiYmVhcmVyIiwiYWNjZXNzX3Rva2VuIiwianNvbiIsInR5cGUiLCJlcnJvciIsInJlc3BvbnNlIiwiYm9keSIsInVwZGF0ZVNpdGVtYXAiLCJudW1iZXIiLCJwIiwicHJvY2VzcyIsImYiLCJyZWFkRmlsZVN5bmMiLCJkIiwiSlNPTiIsInBhcnNlIiwidXJsc2V0IiwicHVzaCIsImxvYyIsIl90ZXh0IiwibGFzdG1vZCIsImZvcm1hdCIsInByaW9yaXR5IiwiY29tcGFjdCIsImlnbm9yZUNvbW1lbnQiLCJzcGFjZXMiLCJyZXN1bHQiLCJqc29uMnhtbCIsInN0cmluZ2lmeSIsIndyaXRlRmlsZSIsImdvb2dsZUluZGV4aW5nQXBpIiwiZGF0YSIsImF4aW9zIiwicG9zdCIsInRoZW4iLCJjYXRjaCIsImhhbmRsZXIiLCJyZXEiLCJyZXMiLCJpcCIsInN0YXR1cyIsInJlcGxhY2UiLCJwYXJhbXMiLCJuZXdQaG9uZSIsIml0ZW0iLCJzYXZlIiwiZSIsIm1lc3NhZ2UiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(api)/./pages/api/phone/index.js\n");
+
+/***/ }),
+
+/***/ "(api)/./pages/api/indexing.json":
+/*!*********************************!*\
+  !*** ./pages/api/indexing.json ***!
+  \*********************************/
 /***/ ((module) => {
 
 module.exports = JSON.parse('{"type":"service_account","project_id":"feisty-audio-355700","private_key_id":"8a61b336ba46aae9d73973a269b29e932452df92","private_key":"-----BEGIN PRIVATE KEY-----\\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC4882XoEc2nftu\\nWGVpZd2sNQdD4omLMgDzXyi3kkB+s35RlWJiox4w1UeNSm8/1KY9+Rc9wziM8Ofi\\nOfWaX5oGwyEf2jIKUcYS+QvAvj9gLP6Y3ZIpHMmNji9+f+dl7HFr9fADLSqgDVUN\\nd+GLCbB2YIpdECdf8CCP/gqvj7gCFB4mG91zOT0A9tjRpfkmGt5BmTl6GhEgtG5/\\n2u4aPIpixkum0uZ0xwiEIPbi29H+ZAbG7TV5kZA14B/ubpv3wskfpDA8kuzfSc1J\\nOK5i0mFEIqd91P8jAj3lrxX/qW+Ab+xxk10FkaDbdeZPh988JahtIt5kbPEUOa4I\\n8HbXUJC3AgMBAAECggEATF4a24tKLFKiMWddhF4T4FnLBKxC988vVk5J/TZt3AMY\\nWu5wP+MzgZ1nHH+KHRScigVSo+V6cbO9Q4uEDniAHF+wyzqoo9stCsN7p1vGxlr9\\nyzfd9IzW6lS15qlAbjTphlb4Ag/BxHGM13FTFzpqew6UwyV65KG9iEcwuVoB9BUP\\nHnNunew8tQ3xGqUAiqV14xrJoDoHYT7UjAgk6RVqLFP7mC2RaKf5UZ51FJ1b5yyt\\nQLKpuJ+BYFc1CxY8GrYvLQSNp1QO4a5HEa6mnQENk5qgrb0mctCRt0nFJXrPLD5D\\nufFTveXB2ovXA2oDvxDOQI469zGCqfOAwTMt1CbSjQKBgQDs+OQF/an+B0IuV0v9\\nYLjCZOaW3dDNFyXx3dNVJ8T6NntD2opw7p46BSHACezEsVTXOJ6WRet5Zkyrpp4n\\nC5eBBezuLCVSziNun+tcENfFaRRsINkdYvL8Iv+alluSZhfcpZyazYg6enwHJyD2\\n66RKgRll1BH5gLzNHETRmpYbEwKBgQDHzZytm7lFptA1Qm0QKBKpOzHlwTVNtm1V\\n0suuaQ2oWLK8HTuv1wDcXmOzEde7cNxq97gYaK+Lbxb7TLUU4xDHm+WKdv/O+xd7\\nTX9TaVNJ6y72OCIMLhBIdHo53Qg/rbZPYJlAYQ1B4M+gUfmVOpEC3QYQpyGWS+Bp\\nvLi/Z+1kTQKBgGh1WkaNx9Zzqqe00Ylyjl8ajU7pnnYZgx938gVyj3DgfTuu5SHc\\n/aCDzJnThiw6IzTv/3AsiB0ujBOKUeLSSEmWrBddHGLA/XtxQRWHUyXxKRB09l/u\\n0z9zygqBxwHkwRYBZuQSP7/PaEba57wQqY4yFFj/v6ClMBSWJnvi0dJDAoGAGcxU\\npJ3syC+Hxriy+FkUP8Gi6bWOumAJsgErx3NNDiWVvnBP2p56P/n4CZEON+eUrkMa\\nBBzQPcK0RvJalz3SVtOsSbqfwQvutj8FZ7G7zVmOkMAitUvlUlWnynzdqcs2NP2W\\nDBf77Duo01yCS2BqhOIg/Fl4Hr3hVgXGHQDASCkCgYAcl8fwcaOLmBXFZaJOerq6\\nXMRm2yhwNGrB/fwCuM32oPAv8+PK08gMEJdr5qfAt1xoNfVppbAkS4O9nC1HmjNT\\nu5QBLEntcy+THpDz2qol8ZGdDMRbUkdGFoksvASvp/9jzky6doNtCDi+F8DbBf4z\\noRNg9DWy7G+1mjpHa/rfKw==\\n-----END PRIVATE KEY-----\\n","client_email":"phonebookup@feisty-audio-355700.iam.gserviceaccount.com","client_id":"116596146250141487828","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_x509_cert_url":"https://www.googleapis.com/robot/v1/metadata/x509/phonebookup%40feisty-audio-355700.iam.gserviceaccount.com"}');
@@ -229,7 +120,7 @@ module.exports = JSON.parse('{"type":"service_account","project_id":"feisty-audi
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [198], () => (__webpack_exec__(5755)));
+var __webpack_exports__ = (__webpack_exec__("(api)/./pages/api/phone/index.js"));
 module.exports = __webpack_exports__;
 
 })();

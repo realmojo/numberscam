@@ -3,9 +3,8 @@ import Phone from "../../../models/Phone";
 import fs from "fs";
 import convert from "xml-js";
 import moment from "moment";
-import axios from "axios";
-var { google } = require("googleapis");
-
+import request from "request";
+const { google } = require("googleapis");
 const key = require("../indexing.json");
 const jwtClient = new google.auth.JWT(
   key.client_email,
@@ -50,30 +49,23 @@ const googleIndexingApi = (number) => {
       console.log(err);
       return;
     }
-    let params = {
+    let options = {
+      url: "https://indexing.googleapis.com/v3/urlNotifications:publish",
+      method: "POST",
+      // Your options, which must include the Content-Type and auth headers
+      headers: {
+        "Content-Type": "application/json",
+      },
       auth: { bearer: tokens.access_token },
+      // Define contents here. The structure of the content is described in the next step.
       json: {
         url: `https://realcup.co.kr/number/${number}`,
         type: "URL_UPDATED",
       },
     };
-
-    axios
-      .post(
-        "https://indexing.googleapis.com/v3/urlNotifications:publish",
-        params,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(() => {
-        console.log(`number indexing success!`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    request(options, function (error, response, body) {
+      console.log(body);
+    });
   });
 };
 
