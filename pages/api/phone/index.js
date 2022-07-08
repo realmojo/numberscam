@@ -4,6 +4,7 @@ import fs from "fs";
 import convert from "xml-js";
 import moment from "moment";
 import axios from "axios";
+var { google } = require("googleapis");
 
 const key = require("../indexing.json");
 const jwtClient = new google.auth.JWT(
