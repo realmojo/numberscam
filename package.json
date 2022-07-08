@@ -15,6 +15,7 @@
     "antd": "^4.20.5",
     "axios": "^0.27.2",
     "fs": "^0.0.1-security",
+    "googleapis": "^105.0.0",
     "moment": "^2.29.3",
     "mongoose": "^6.3.3",
     "next": "12.1.6",

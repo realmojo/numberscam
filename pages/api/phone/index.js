@@ -3,6 +3,16 @@ import Phone from "../../../models/Phone";
 import fs from "fs";
 import convert from "xml-js";
 import moment from "moment";
+import axios from "axios";
+
+const key = require("../indexing.json");
+const jwtClient = new google.auth.JWT(
+  key.client_email,
+  null,
+  key.private_key,
+  ["https://www.googleapis.com/auth/indexing"],
+  null
+);
 
 const updateSitemap = (number) => {
   console.log("sitemap add number: ", number);
@@ -33,6 +43,39 @@ const updateSitemap = (number) => {
   });
 };
 
+const googleIndexingApi = (number) => {
+  jwtClient.authorize(function (err, tokens) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    let params = {
+      auth: { bearer: tokens.access_token },
+      json: {
+        url: `https://realcup.co.kr/number/${number}`,
+        type: "URL_UPDATED",
+      },
+    };
+
+    axios
+      .post(
+        "https://indexing.googleapis.com/v3/urlNotifications:publish",
+        params,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(() => {
+        console.log(`number indexing success!`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
+
 const handler = async (req, res) => {
   const { method } = req;
   let { number, ip } = req.body;
@@ -55,6 +98,9 @@ const handler = async (req, res) => {
 
         // sitemap 등록
         updateSitemap(item.number);
+
+        // googleindexing 등록
+        googleIndexingApi(item.number);
 
         res.status(200).json(item || {});
         break;
