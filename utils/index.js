@@ -44,15 +44,15 @@ export const getTitle = (n) => {
     dashNumber = d.join("");
   } else if (
     length === 10 &&
-    LOCATION_START_NUMBER.includes(`${n[0]}${n[1]}${n[1]}`)
+    LOCATION_START_NUMBER.includes(`${n[0]}${n[1]}${n[2]}`)
   ) {
-    // 031-xxxx-xxxx
+    // 031-xxx-xxxx
     d.splice(3, 0, "-");
     d.splice(7, 0, "-");
     dashNumber = d.join("");
   } else if (
     length === 11 &&
-    LOCATION_START_NUMBER.includes(`${n[0]}${n[1]}${n[1]}`)
+    LOCATION_START_NUMBER.includes(`${n[0]}${n[1]}${n[2]}`)
   ) {
     // 031-xxxx-xxxx
     d.splice(3, 0, "-");
