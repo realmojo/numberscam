@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import "moment/locale/ko";
 import { Avatar, Divider, Comment, Tooltip } from "antd";
-import { convertIP, getRandomImageLink } from "../utils";
+import { convertIP } from "../utils";
 
 const Comments = React.memo(({ item, index }) => {
   return (
