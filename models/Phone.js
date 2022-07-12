@@ -14,8 +14,8 @@ const PhoneSchema = new Schema({
   spamCount: { type: Number, default: 0 },
   safeCount: { type: Number, default: 0 },
   isDelete: { type: Boolean, default: false },
-  created: { type: String, default: moment().format("YYYY-MM-DD HH:mm:ss") },
-  updated: { type: String, default: moment().format("YYYY-MM-DD HH:mm:ss") },
+  created: { type: String, default: '' },
+  updated: { type: String, default: '' },
 });
 
 const Phone = models.Phone || model("Phone", PhoneSchema);

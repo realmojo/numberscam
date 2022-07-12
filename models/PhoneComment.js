@@ -7,7 +7,7 @@ const PhoneCommentSchema = new Schema({
   message: { type: String, default: "" },
   ip: { type: String, default: "" },
   isDelete: { type: Boolean, default: false },
-  created: { type: String, default: moment().format("YYYY-MM-DD HH:mm:ss") },
+  created: { type: String, default: '' },
 });
 
 const PhoneComment =

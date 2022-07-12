@@ -84,6 +84,8 @@ const handler = async (req, res) => {
         const params = {
           number,
           ip,
+          created: moment().format("YYYY-MM-DD HH:mm:ss"),
+          updated: moment().format("YYYY-MM-DD HH:mm:ss"),
         };
 
         const newPhone = new Phone(params);
