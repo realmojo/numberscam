@@ -41,7 +41,7 @@ export const Header = () => {
               />
             </Link>
 
-            <Input.Group compact style={{ minWidth: "400px" }}>
+            <Input.Group compact style={{ minWidth: "250px" }}>
               <Input
                 size="large"
                 value={number}
