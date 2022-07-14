@@ -4,14 +4,6 @@ import Link from "next/link";
 import { PageHeader, Input, Space, Avatar } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
-const suffix = (
-  <SearchOutlined
-    style={{
-      fontSize: 16,
-      color: "#1890ff",
-    }}
-  />
-);
 export const Header = () => {
   const router = useRouter();
   const [number, setNumber] = useState("");
@@ -27,13 +19,23 @@ export const Header = () => {
     setNumber(onlyNumber);
   };
 
+  const suffix = (
+    <SearchOutlined
+      style={{
+        fontSize: 16,
+        color: "#1890ff",
+      }}
+      onClick={() => onSearch()}
+    />
+  );
+
   return (
     <>
       <PageHeader
         style={{ background: "#1890ff" }}
         className="site-page-header"
         title={
-          <Space>
+          <Space size={0}>
             <Link href="/">
               <Avatar
                 style={{ cursor: "pointer", width: 50, height: 50 }}
@@ -41,7 +43,7 @@ export const Header = () => {
               />
             </Link>
 
-            <Input.Group compact style={{ minWidth: "250px" }}>
+            <Input.Group compact style={{ minWidth: "230px" }}>
               <Input
                 size="large"
                 value={number}
