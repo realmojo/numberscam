@@ -76,7 +76,7 @@ const fakeIp = () => {
 
 const handler = async (req, res) => {
   const { method } = req;
-  let { number, ip, comment } = req.body;
+  let { number, ip, message } = req.body;
 
   if (!number) {
     throw "no number";
@@ -107,11 +107,11 @@ const handler = async (req, res) => {
         const newPhone = new Phone(params);
         const item = await newPhone.save();
 
-        if (comment) {
+        if (message) {
           const commentParams = {
             created: moment().format("YYYY-MM-DD HH:mm:ss"),
             number,
-            message: comment,
+            message,
             ip: fakeIp(),
           };
           const newPhoneComment = new PhoneComment(commentParams);
