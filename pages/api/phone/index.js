@@ -81,6 +81,13 @@ const handler = async (req, res) => {
       case "POST":
         // 숫자만 들어가게끔 함.
         number = number.replace(/[^0-9]/g, "");
+
+        const phoneInfo = await Phone.findOne({ number });
+        if (!phoneInfo) {
+          res.status(200).send('already');
+          break;
+        }
+        
         const params = {
           number,
           ip,
