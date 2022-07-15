@@ -89,8 +89,22 @@ const handler = async (req, res) => {
 
         const phoneInfo = await Phone.findOne({ number });
         if (phoneInfo) {
-          res.status(200).send("already");
-          break;
+          if (message) {
+            const commentParams = {
+              created: moment().format("YYYY-MM-DD HH:mm:ss"),
+              number,
+              message,
+              ip: fakeIp(),
+            };
+            const newPhoneComment = new PhoneComment(commentParams);
+            await newPhoneComment.save();
+            console.log("comment add");
+            res.status(200).json(phoneInfo);
+            break;
+          } else {
+            res.status(200).send("already");
+            break;
+          }
         }
 
         if (!ip) {
