@@ -1,5 +1,6 @@
 import dbConnect from "../../../lib/mongodb";
 import Phone from "../../../models/Phone";
+import PhoneComment from "../../../models/PhoneComment";
 import fs from "fs";
 import convert from "xml-js";
 import moment from "moment";
@@ -52,12 +53,10 @@ const googleIndexingApi = (number) => {
     let options = {
       url: "https://indexing.googleapis.com/v3/urlNotifications:publish",
       method: "POST",
-      // Your options, which must include the Content-Type and auth headers
       headers: {
         "Content-Type": "application/json",
       },
       auth: { bearer: tokens.access_token },
-      // Define contents here. The structure of the content is described in the next step.
       json: {
         url: `https://realcup.co.kr/number/${number}`,
         type: "URL_UPDATED",
@@ -69,9 +68,15 @@ const googleIndexingApi = (number) => {
   });
 };
 
+const fakeIp = () => {
+  return `${Math.floor(Math.random() * 255)}.${Math.floor(
+    Math.random() * 255
+  )}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
+};
+
 const handler = async (req, res) => {
   const { method } = req;
-  let { number, ip } = req.body;
+  let { number, ip, comment } = req.body;
 
   if (!number) {
     throw "no number";
@@ -84,10 +89,14 @@ const handler = async (req, res) => {
 
         const phoneInfo = await Phone.findOne({ number });
         if (phoneInfo) {
-          res.status(200).send('already');
+          res.status(200).send("already");
           break;
         }
-        
+
+        if (!ip) {
+          ip = fakeIp();
+        }
+
         const params = {
           number,
           ip,
@@ -97,6 +106,17 @@ const handler = async (req, res) => {
 
         const newPhone = new Phone(params);
         const item = await newPhone.save();
+
+        if (comment) {
+          const commentParams = {
+            created: moment().format("YYYY-MM-DD HH:mm:ss"),
+            number,
+            message: comment,
+            ip: fakeIp(),
+          };
+          const newPhoneComment = new PhoneComment(commentParams);
+          await newPhoneComment.save();
+        }
 
         // sitemap 등록
         updateSitemap(item.number);
