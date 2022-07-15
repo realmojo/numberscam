@@ -83,7 +83,7 @@ const handler = async (req, res) => {
         number = number.replace(/[^0-9]/g, "");
 
         const phoneInfo = await Phone.findOne({ number });
-        if (!phoneInfo) {
+        if (phoneInfo) {
           res.status(200).send('already');
           break;
         }
