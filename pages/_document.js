@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-// import { GA_TRACKING_ID } from "/common/gtag";
+import { GA_TRACKING_ID } from "../lib/gtag";
 
 export default class MyDocument extends Document {
   render() {
@@ -14,11 +14,11 @@ export default class MyDocument extends Document {
             name="naver-site-verification"
             content="53fa8f20253ad18858123e101af204a3a07a2816"
           /> */}
-          {/* <script
+          <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-          ></script> */}
-          {/* <script
+          ></script>
+          <script
             dangerouslySetInnerHTML={{
               __html: `
             window.dataLayer = window.dataLayer || [];
@@ -30,7 +30,7 @@ export default class MyDocument extends Document {
             });
           `,
             }}
-          /> */}
+          />
         </Head>
         <body>
           <div id="root">

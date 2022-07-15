@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import "antd/dist/antd.css";
 import NextNProgress from "nextjs-progressbar";
 import { Layout } from "antd";
 const { Footer } = Layout;
+import * as gtag from "../lib/gtag";
 
 function MyApp({ Component, pageProps }) {
   const schemaData = {
@@ -20,6 +22,7 @@ function MyApp({ Component, pageProps }) {
     brand: "Phonebookup",
     datePublished: "2022-05-15",
   };
+  const router = useRouter();
   useEffect(() => {
     const ip = localStorage.getItem("ip");
     if (ip === null) {
@@ -27,7 +30,15 @@ function MyApp({ Component, pageProps }) {
         localStorage.setItem("ip", res.data.ip ? res.data.ip : "0.0.0.0");
       });
     }
-  }, []);
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <>
       <Head>
