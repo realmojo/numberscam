@@ -62,6 +62,12 @@ function MyApp({ Component, pageProps }) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9130836798889522"
           crossOrigin="anonymous"
         />
+        <script async type="text/javascript" src="//wcs.naver.net/wcslog.js" />
+        <script
+          async
+          type="text/javascript"
+          src="https://tistory2.daumcdn.net/tistory/1616367/skin/images/naver-analytics.js"
+        />
       </Head>
       <NextNProgress
         color="#fff"
