@@ -27,4 +27,5 @@ export const LOCATION_START_NUMBER = [
   "062",
   "063",
   "064",
+  "092",
 ];
