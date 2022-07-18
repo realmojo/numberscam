@@ -129,7 +129,7 @@ export const NumberPage = ({ item, commentItems }) => {
 
           <Link href={`/number/${number}?isModal=true`} target="_blank">
             <div className="text-center">
-              <Button type="primary">
+              <Button size="large" type="primary">
                 <a>번호 확인하기</a>
               </Button>
             </div>
