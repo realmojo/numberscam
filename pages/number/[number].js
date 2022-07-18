@@ -128,7 +128,7 @@ export const NumberPage = ({ item, commentItems }) => {
           <Paragraph className="text-right text-gray-400">{created}</Paragraph>
 
           <Link href={`/number/${number}?isModal=true`} target="_blank">
-            <div className="text-center">
+            <div className="text-center mb-4">
               <Button size="large" type="primary">
                 <a>번호 확인하기</a>
               </Button>
