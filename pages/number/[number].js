@@ -3,14 +3,18 @@ import Head from "next/head";
 import axios from "axios";
 import moment from "moment";
 import AdSense from "react-adsense";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { Row, Col, Form, Input, Button, Divider, Typography } from "antd";
 const { Title, Paragraph } = Typography;
 import { Comments } from "../../components/Comment";
 import { Recently } from "../../components/Recently";
 import { Header } from "../../components/Header";
 import { getTitle } from "../../utils";
+import Modal from "react-modal";
 
 export const NumberPage = ({ item, commentItems }) => {
+  const router = useRouter();
   const { number, content, ip, created, updated } = item;
   const [message, setMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
@@ -71,6 +75,10 @@ export const NumberPage = ({ item, commentItems }) => {
     setMessage(value);
   };
 
+  const closeModal = () => {
+    router.push(`/number/${number}`);
+  };
+
   return (
     <>
       <Head>
@@ -118,6 +126,14 @@ export const NumberPage = ({ item, commentItems }) => {
           <Title>{getTitle(number)}</Title>
           <Divider style={{ margin: "4px 0" }} />
           <Paragraph className="text-right text-gray-400">{created}</Paragraph>
+
+          <Link href={`/number/${number}?isModal=true`} target="_blank">
+            <div className="text-center">
+              <Button type="primary">
+                <a>번호 확인하기</a>
+              </Button>
+            </div>
+          </Link>
           <AdSense.Google
             style={{ display: "block" }}
             client="ca-pub-9130836798889522"
@@ -183,6 +199,20 @@ export const NumberPage = ({ item, commentItems }) => {
             responsive="true"
           />
           <Recently number={number} />
+
+          <Modal
+            isOpen={!!router.query.isModal}
+            onRequestClose={() => router.push(`/number/${number}`)}
+            contentLabel="number modal"
+            ariaHideApp={false}
+          >
+            <p>
+              {comments[0] !== undefined
+                ? comments[0].message
+                : "아직 등록되지 않은 번호 입니다. 첫 댓글이 내용으로 들어갑니다."}
+            </p>
+            <Button onClick={() => closeModal()}>닫기</Button>
+          </Modal>
         </Col>
       </Row>
     </>

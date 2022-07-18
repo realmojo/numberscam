@@ -33,3 +33,22 @@ h1 {
   /* max-height: 300px;
   overflow-y: auto; */
 }
+
+.ReactModal__Overlay {
+  background-color: #171717bf !important;
+  padding: 20px;
+}
+
+.ReactModal__Content {
+  width: 400px;
+  margin: 100px auto;
+  position: relative !important;
+  inset: 0 !important;
+  border: none !important;
+}
+
+@media (max-width: 575px) {
+  .ReactModal__Content {
+    width: 100%;
+  }
+}
