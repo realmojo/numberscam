@@ -163,6 +163,14 @@ export const NumberPage = ({ item, commentItems, geo }) => {
               <span className="mr-2">👉</span> 당신의 도움으로 큰 피해를 막을 수
               있습니다.
             </div>
+            <AdSense.Google
+              client="ca-pub-9130836798889522"
+              slot="1853974629"
+              style={{ display: "block" }}
+              format="fluid"
+              responsive="true"
+              layoutKey="-gw-3+1f-3d+2z"
+            />
             <Input.Group compact>
               <Input
                 style={{ width: "calc(100% - 80px)" }}
@@ -186,14 +194,6 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           </Form.Item>
           {isComplete && <div className="ml-2">등록이 완료되었습니다.</div>}
 
-          <AdSense.Google
-            client="ca-pub-9130836798889522"
-            slot="1853974629"
-            style={{ display: "block" }}
-            format="fluid"
-            responsive="true"
-            layoutKey="-gw-3+1f-3d+2z"
-          />
           {/* <AdSense.Google
             style={{ display: "block" }}
             client="ca-pub-9130836798889522"
