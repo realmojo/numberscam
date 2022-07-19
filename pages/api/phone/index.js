@@ -68,6 +68,24 @@ const googleIndexingApi = (number) => {
   });
 };
 
+const bingIndexApi = (number) => {
+  let options = {
+    url: "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=9aaec2c0fcd94b57b24035a8b07aac72​",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      charset: "utf-8",
+    },
+    json: {
+      siteUrl: "https://realcup.co.kr",
+      urlList: [`https://realcup.co.kr/number/${number}`],
+    },
+  };
+  request(options, function (error, response, body) {
+    console.log(body);
+  });
+};
+
 const fakeIp = () => {
   return `${Math.floor(Math.random() * 255) + 1}.${Math.floor(
     Math.random() * 255
@@ -137,6 +155,9 @@ const handler = async (req, res) => {
 
         // googleindexing 등록
         googleIndexingApi(item.number);
+
+        // bingIndexing 등록
+        bingIndexApi(item.number);
 
         res.status(200).json(item || {});
         break;
