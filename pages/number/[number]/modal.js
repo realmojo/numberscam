@@ -7,12 +7,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Row, Col, Form, Input, Button, Divider, Typography } from "antd";
 const { Title, Paragraph } = Typography;
-import { Comments } from "../../components/Comment";
-import { Recently } from "../../components/Recently";
-import { Header } from "../../components/Header";
-import { getTitle, convertDashNumber } from "../../utils";
+import { Comments } from "../../../components/Comment";
+import { Recently } from "../../../components/Recently";
+import { Header } from "../../../components/Header";
+import { getTitle, convertDashNumber } from "../../../utils";
 
-export const NumberPage = ({ item, commentItems, geo }) => {
+import Modal from "react-modal";
+
+export const NumberModalPage = ({ item, commentItems, geo }) => {
+  const router = useRouter();
   const { number, content, ip, created, updated } = item;
   const [message, setMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
@@ -71,6 +74,10 @@ export const NumberPage = ({ item, commentItems, geo }) => {
   const onChange = (e) => {
     const { value } = e.target;
     setMessage(value);
+  };
+
+  const closeModal = () => {
+    router.push(`/number/${number}`);
   };
 
   return (
@@ -133,13 +140,13 @@ export const NumberPage = ({ item, commentItems, geo }) => {
               <div>Please select the number you want to check</div>
             )}
           </div>
-          <AdSense.Google
+          {/* <AdSense.Google
             style={{ display: "block" }}
             client="ca-pub-9130836798889522"
             slot="9693754432"
             format="auto"
             responsive="true"
-          />
+          /> */}
           <div className="text-center">
             <Button className="mr-2" size="large" type="primary">
               <Link href={`/number/${number}/modal`} target="_blank">
@@ -154,7 +161,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           </div>
           <p className="content-wrap">
             {comments[0] !== undefined
-              ? ""
+              ? comments[0].message
               : "아직 등록되지 않은 번호 입니다. 첫 댓글이 내용으로 들어갑니다."}
           </p>
           <Divider style={{ margin: "8px 0" }} />
@@ -185,15 +192,6 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             </Input.Group>
           </Form.Item>
           {isComplete && <div className="ml-2">등록이 완료되었습니다.</div>}
-
-          <AdSense.Google
-            client="ca-pub-9130836798889522"
-            slot="1853974629"
-            style={{ display: "block" }}
-            format="fluid"
-            responsive="true"
-            layoutKey="-gw-3+1f-3d+2z"
-          />
           {/* <AdSense.Google
             style={{ display: "block" }}
             client="ca-pub-9130836798889522"
@@ -211,29 +209,43 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
-          <AdSense.Google
+          {/* <AdSense.Google
             style={{ display: "block" }}
             client="ca-pub-9130836798889522"
-            slot="2122116670"
+            slot="3419746008"
             format="auto"
             responsive="true"
-          />
+          /> */}
 
-          {/* <AdSense.Google
+          <AdSense.Google
             client="ca-pub-9130836798889522"
             slot="1853974629"
             style={{ display: "block" }}
             format="fluid"
             responsive="true"
             layoutKey="-gw-3+1f-3d+2z"
-          /> */}
+          />
           <Recently number={number} />
+
+          <Modal
+            isOpen={true}
+            onRequestClose={() => router.push(`/number/${number}`)}
+            contentLabel="number modal"
+            ariaHideApp={false}
+          >
+            <p>
+              {comments[0] !== undefined
+                ? comments[0].message
+                : "아직 등록되지 않은 번호 입니다. 첫 댓글이 내용으로 들어갑니다."}
+            </p>
+            <Button onClick={() => closeModal()}>닫기</Button>
+          </Modal>
         </Col>
       </Row>
     </>
   );
 };
-export default NumberPage;
+export default NumberModalPage;
 
 export const getServerSideProps = async ({ params }) => {
   const geoip = require("geoip-lite");

@@ -5,7 +5,7 @@ export const convertIP = (value) => {
   return `${s[0]}.x.x.${s[3]}`;
 };
 
-export const getTitle = (n) => {
+export const convertDashNumber = (n) => {
   const length = n.length;
   let dashNumber = "";
   let d = n.split("");
@@ -61,6 +61,10 @@ export const getTitle = (n) => {
   } else {
     dashNumber = n;
   }
+  return dashNumber;
+};
 
+export const getTitle = (n) => {
+  let dashNumber = convertDashNumber(n);
   return `${n} / ${dashNumber}`;
 };
