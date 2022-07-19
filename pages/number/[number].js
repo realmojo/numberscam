@@ -140,7 +140,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             format="auto"
             responsive="true"
           />
-          <div className="text-center">
+          <div className="text-center mt-4">
             <Button className="mr-2" size="large" type="primary">
               <Link href={`/number/${number}/modal`} target="_blank">
                 <a>{number}</a>
