@@ -70,7 +70,7 @@ const googleIndexingApi = (number) => {
 
 const bingIndexApi = (number) => {
   let options = {
-    url: "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=9aaec2c0fcd94b57b24035a8b07aac72​",
+    url: "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=9aaec2c0fcd94b57b24035a8b07aac72",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -82,7 +82,10 @@ const bingIndexApi = (number) => {
     },
   };
   request(options, function (error, response, body) {
-    console.log(body);
+    if (error) {
+      console.log(error);
+    }
+    console.log(`bing indexing api success: ${number}, ${body}`);
   });
 };
 
@@ -104,7 +107,6 @@ const handler = async (req, res) => {
       case "POST":
         // 숫자만 들어가게끔 함.
         number = number.replace(/[^0-9]/g, "");
-
         const phoneInfo = await Phone.findOne({ number });
         if (phoneInfo) {
           if (message) {
