@@ -140,13 +140,6 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
               <div>Please select the number you want to check</div>
             )}
           </div>
-          {/* <AdSense.Google
-            style={{ display: "block" }}
-            client="ca-pub-9130836798889522"
-            slot="9693754432"
-            format="auto"
-            responsive="true"
-          /> */}
           <div className="text-center">
             <Button className="mr-2" size="large" type="primary">
               <Link href={`/number/${number}/modal`} target="_blank">
@@ -159,11 +152,6 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
               </Link>
             </Button>
           </div>
-          <p className="content-wrap">
-            {comments[0] !== undefined
-              ? comments[0].message
-              : "아직 등록되지 않은 번호 입니다. 첫 댓글이 내용으로 들어갑니다."}
-          </p>
           <Divider style={{ margin: "8px 0" }} />
           <Form.Item>
             <div className="mb-2 text-xs">
@@ -192,13 +180,6 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
             </Input.Group>
           </Form.Item>
           {isComplete && <div className="ml-2">등록이 완료되었습니다.</div>}
-          {/* <AdSense.Google
-            style={{ display: "block" }}
-            client="ca-pub-9130836798889522"
-            slot="2634165992"
-            format="auto"
-            responsive="true"
-          /> */}
           {comments.map((item, index) => (
             <Comments index={index} key={index} item={item} />
           ))}
@@ -209,14 +190,6 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
-          {/* <AdSense.Google
-            style={{ display: "block" }}
-            client="ca-pub-9130836798889522"
-            slot="3419746008"
-            format="auto"
-            responsive="true"
-          /> */}
-
           <AdSense.Google
             client="ca-pub-9130836798889522"
             slot="1853974629"
