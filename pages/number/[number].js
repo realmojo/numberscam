@@ -122,15 +122,11 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           <Paragraph className="text-right text-gray-400">{created}</Paragraph>
 
           <div className="text-center mb-2">
-            {geo.country === "JP" ? (
-              <div>確認したい番号を選択してください</div>
-            ) : (
-              ""
-            )}
+            {geo.country === "JP" ? <div>番号を確認してください</div> : ""}
             {geo.country === "KR" ? (
-              <div>확인하고 싶은 번호를 선택해주세요</div>
+              <div>번호를 확인해 보세요</div>
             ) : (
-              <div>Please select the number you want to check</div>
+              <div>Check the number</div>
             )}
           </div>
           <AdSense.Google
@@ -141,22 +137,12 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             responsive="true"
           />
           <div className="text-center mt-4">
-            <Button className="mr-2" size="large" type="primary">
+            <Button size="large" type="primary" className="w-full">
               <Link href={`/number/${number}/modal`} target="_blank">
-                <a>{number}</a>
-              </Link>
-            </Button>
-            <Button size="large" type="primary">
-              <Link href={`/number/${number}/modal`} target="_blank">
-                <a>{convertDashNumber(number)}</a>
+                <a>시작</a>
               </Link>
             </Button>
           </div>
-          <p className="content-wrap">
-            {comments[0] !== undefined
-              ? ""
-              : "아직 등록되지 않은 번호 입니다. 첫 댓글이 내용으로 들어갑니다."}
-          </p>
           <Divider style={{ margin: "8px 0" }} />
           <Form.Item>
             <div className="mb-2 text-xs">
@@ -171,7 +157,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
               responsive="true"
               layoutKey="-gw-3+1f-3d+2z"
             />
-            <Input.Group compact>
+            <Input.Group className="mt-2" compact>
               <Input
                 style={{ width: "calc(100% - 80px)" }}
                 value={message}
