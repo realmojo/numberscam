@@ -133,7 +133,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             <AdSense.Google
               style={{ display: "block" }}
               client="ca-pub-9130836798889522"
-              slot="9693754432"
+              slot="4974784375"
               format="auto"
               responsive="true"
             />
@@ -163,7 +163,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             {geo.country === "JP" ? (
               <AdSense.Google
                 client="ca-pub-9130836798889522"
-                slot="1853974629"
+                slot="8656924809"
                 style={{ display: "block" }}
                 format="fluid"
                 responsive="true"
@@ -223,7 +223,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             <AdSense.Google
               style={{ display: "block" }}
               client="ca-pub-9130836798889522"
-              slot="2122116670"
+              slot="2348621032"
               format="auto"
               responsive="true"
             />
@@ -236,15 +236,6 @@ export const NumberPage = ({ item, commentItems, geo }) => {
               responsive="true"
             />
           )}
-
-          {/* <AdSense.Google
-            client="ca-pub-9130836798889522"
-            slot="1853974629"
-            style={{ display: "block" }}
-            format="fluid"
-            responsive="true"
-            layoutKey="-gw-3+1f-3d+2z"
-          /> */}
           <Recently number={number} />
         </Col>
       </Row>
