@@ -129,13 +129,24 @@ export const NumberPage = ({ item, commentItems, geo }) => {
               <div>Check the number</div>
             )}
           </div>
-          <AdSense.Google
-            style={{ display: "block" }}
-            client="ca-pub-9130836798889522"
-            slot="9693754432"
-            format="auto"
-            responsive="true"
-          />
+          {geo.country === "JP" ? (
+            <AdSense.Google
+              style={{ display: "block" }}
+              client="ca-pub-9130836798889522"
+              slot="9693754432"
+              format="auto"
+              responsive="true"
+            />
+          ) : (
+            <AdSense.Google
+              style={{ display: "block" }}
+              client="ca-pub-9130836798889522"
+              slot="5557238304"
+              format="auto"
+              responsive="true"
+            />
+          )}
+
           <div className="text-center mt-4">
             <Button size="large" type="primary" className="w-full">
               <Link href={`/number/${number}/modal`} target="_blank">
@@ -149,14 +160,25 @@ export const NumberPage = ({ item, commentItems, geo }) => {
               <span className="mr-2">👉</span> 당신의 도움으로 큰 피해를 막을 수
               있습니다.
             </div>
-            <AdSense.Google
-              client="ca-pub-9130836798889522"
-              slot="1853974629"
-              style={{ display: "block" }}
-              format="fluid"
-              responsive="true"
-              layoutKey="-gw-3+1f-3d+2z"
-            />
+            {geo.country === "JP" ? (
+              <AdSense.Google
+                client="ca-pub-9130836798889522"
+                slot="1853974629"
+                style={{ display: "block" }}
+                format="fluid"
+                responsive="true"
+                layoutKey="-gw-3+1f-3d+2z"
+              />
+            ) : (
+              <AdSense.Google
+                client="ca-pub-9130836798889522"
+                slot="3259760911"
+                style={{ display: "block" }}
+                format="fluid"
+                responsive="true"
+                layoutKey="-gw-3+1f-3d+2z"
+              />
+            )}
             <Input.Group className="mt-2" compact>
               <Input
                 style={{ width: "calc(100% - 80px)" }}
@@ -197,13 +219,23 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
-          <AdSense.Google
-            style={{ display: "block" }}
-            client="ca-pub-9130836798889522"
-            slot="2122116670"
-            format="auto"
-            responsive="true"
-          />
+          {geo.country === "JP" ? (
+            <AdSense.Google
+              style={{ display: "block" }}
+              client="ca-pub-9130836798889522"
+              slot="2122116670"
+              format="auto"
+              responsive="true"
+            />
+          ) : (
+            <AdSense.Google
+              style={{ display: "block" }}
+              client="ca-pub-9130836798889522"
+              slot="9304911621"
+              format="auto"
+              responsive="true"
+            />
+          )}
 
           {/* <AdSense.Google
             client="ca-pub-9130836798889522"
