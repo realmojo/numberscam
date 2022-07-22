@@ -263,7 +263,9 @@ export const getServerSideProps = async ({ params }) => {
   const {
     data: { ip },
   } = await axios.get(`https://api.ipify.org?format=json`);
+  console.log(ip);
   const geo = geoip.lookup(ip);
+  console.log(geo);
   const response = await axios.get(
     `${process.env.BASE_URL}/api/phone/${number}`
   );
