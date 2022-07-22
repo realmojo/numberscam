@@ -198,6 +198,26 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
           lg={{ span: 8 }}
         >
           <Recently number={number} CODE={CODE} />
+
+          <Modal
+            isOpen={true}
+            onRequestClose={() => router.push(`/number/${number}`)}
+            contentLabel="number modal"
+            ariaHideApp={false}
+          >
+            <p>
+              {comments[0] !== undefined
+                ? comments[0].message
+                : CODE === "JP"
+                ? "まだ登録されていない番号です。 最初のコメントが内容に入ります。"
+                : CODE === "KR"
+                ? "아직 등록되지 않은 번호 입니다. 첫 댓글이 내용으로 들어갑니다."
+                : "This number has not been registered yet. The first comment enters the content."}
+            </p>
+            <Button onClick={() => closeModal()}>
+              {CODE === "JP" ? "閉じる" : CODE === "KR" ? "닫기" : "Close"}
+            </Button>
+          </Modal>
         </Col>
       </Row>
     </>
