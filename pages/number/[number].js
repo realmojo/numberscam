@@ -2,22 +2,16 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import axios from "axios";
 import moment from "moment";
-import AdSense from "react-adsense";
 import Link from "next/link";
 import { Row, Col, Form, Input, Button, Divider, Typography } from "antd";
 const { Title, Paragraph } = Typography;
 import { Comments } from "../../components/Comment";
 import { Recently } from "../../components/Recently";
 import { Header } from "../../components/Header";
-import { Header } from "../../components/Header";
-import { Header } from "../../components/Header";
-import { Header } from "../../components/Header";
-import { getTitle, convertDashNumber } from "../../utils";
+import { getTitle } from "../../utils";
 import { AdsenseTop } from "../../components/AdsenseTop";
-import {
-  AdsenseCategory,
-  AdsenseComment,
-} from "../../components/AdsenseComment";
+import { AdsenseCategory } from "../../components/AdsenseCategory";
+import { AdsenseComment } from "../../components/AdsenseComment";
 
 export const NumberPage = ({ item, commentItems, geo }) => {
   const CODE = geo.country;
