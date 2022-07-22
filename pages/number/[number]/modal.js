@@ -241,7 +241,7 @@ export const getServerSideProps = async ({ req, params }) => {
   }
 
   const ip = req.headers["x-real-ip"] || req.connection.remoteAddress;
-  const geoInfo = geoip.lookup(ip);
+  const geoInfo = await geoip.lookup(ip);
   const geo =
     geoInfo !== null
       ? geoInfo
