@@ -264,8 +264,22 @@ export const getServerSideProps = async ({ req, params }) => {
   //   data: { ip },
   // } = await axios.get(`https://api.ipify.org?format=json`);
   const ip = req.headers["x-real-ip"] || req.connection.remoteAddress;
-  console.log(ip);
-  const geo = geoip.lookup(ip);
+
+  const geoInfo = geoip.lookup(ip);
+  const geo =
+    geoInfo !== null
+      ? geoInfo
+      : {
+          range: [877527040, 877658111],
+          country: "KR",
+          region: "28",
+          eu: "0",
+          timezone: "Asia/Seoul",
+          city: "Incheon",
+          ll: [37.4562, 126.7288],
+          metro: 0,
+          area: 1000,
+        };
   console.log(geo);
   const response = await axios.get(
     `${process.env.BASE_URL}/api/phone/${number}`
