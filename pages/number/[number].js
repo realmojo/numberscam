@@ -4,7 +4,6 @@ import axios from "axios";
 import moment from "moment";
 import AdSense from "react-adsense";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { Row, Col, Form, Input, Button, Divider, Typography } from "antd";
 const { Title, Paragraph } = Typography;
 import { Comments } from "../../components/Comment";
@@ -13,7 +12,7 @@ import { Header } from "../../components/Header";
 import { getTitle, convertDashNumber } from "../../utils";
 
 export const NumberPage = ({ item, commentItems, geo }) => {
-  console.log(geo);
+  const CODE = geo.country;
   const { number, content, ip, created, updated } = item;
   const [message, setMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
@@ -123,14 +122,15 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           <Paragraph className="text-right text-gray-400">{created}</Paragraph>
 
           <div className="text-center mb-2">
-            {geo.country === "JP" ? <div>番号を確認してください</div> : ""}
-            {geo.country === "KR" ? (
+            {CODE === "JP" ? (
+              <div>番号を確認してください</div>
+            ) : CODE === "KR" ? (
               <div>번호를 확인해 보세요</div>
             ) : (
               <div>Check the number</div>
             )}
           </div>
-          {geo.country === "JP" ? (
+          {CODE === "JP" ? (
             <AdSense.Google
               style={{ display: "block" }}
               client="ca-pub-9130836798889522"
@@ -151,17 +151,21 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           <div className="text-center mt-4">
             <Button size="large" type="primary" className="w-full">
               <Link href={`/number/${number}/modal`} target="_blank">
-                <a>시작</a>
+                <a>{CODE === "JP" ? "スタート" : "START"}</a>
               </Link>
             </Button>
           </div>
           <Divider style={{ margin: "8px 0" }} />
           <Form.Item>
             <div className="mb-2 text-xs">
-              <span className="mr-2">👉</span> 당신의 도움으로 큰 피해를 막을 수
-              있습니다.
+              <span className="mr-2">👉</span>{" "}
+              {CODE === "JP"
+                ? "あなたの助けを借りて大きなダメージを防ぐことができます。"
+                : CODE === "KR"
+                ? "당신의 도움으로 큰 피해를 막을 수 있습니다."
+                : "With your help, great damage can be prevented."}
             </div>
-            {geo.country === "JP" ? (
+            {CODE === "JP" ? (
               <AdSense.Google
                 client="ca-pub-9130836798889522"
                 slot="8656924809"
@@ -186,7 +190,13 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                 value={message}
                 status={isEmpty ? "error" : ""}
                 onChange={onChange}
-                placeholder="이 번호에 대해서 알려주세요."
+                placeholder={
+                  CODE === "JP"
+                    ? "この番号について教えてください。"
+                    : CODE === "KR"
+                    ? "이 번호에 대해 알려주세요."
+                    : "Please tell me about this number."
+                }
                 onKeyDown={(e) => {
                   handleSubmit(e);
                 }}
@@ -197,19 +207,19 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                 onClick={(e) => handleClickSubmit(e)}
                 type="primary"
               >
-                등록
+                {CODE === "JP" ? "入力" : CODE === "KR" ? "등록" : "Register"}
               </Button>
             </Input.Group>
           </Form.Item>
-          {isComplete && <div className="ml-2">등록이 완료되었습니다.</div>}
-
-          {/* <AdSense.Google
-            style={{ display: "block" }}
-            client="ca-pub-9130836798889522"
-            slot="2634165992"
-            format="auto"
-            responsive="true"
-          /> */}
+          {isComplete && (
+            <div className="ml-2">
+              {CODE === "JP"
+                ? "登録が完了しました。"
+                : CODE === "KR"
+                ? "등록이 완료되었습니다."
+                : "Done."}
+            </div>
+          )}
           {comments.map((item, index) => (
             <Comments index={index} key={index} item={item} />
           ))}
@@ -220,7 +230,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
-          {geo.country === "JP" ? (
+          {CODE === "JP" ? (
             <AdSense.Google
               style={{ display: "block" }}
               client="ca-pub-9130836798889522"
@@ -237,7 +247,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
               responsive="true"
             />
           )}
-          <Recently number={number} />
+          <Recently number={number} CODE={CODE} />
         </Col>
       </Row>
     </>
@@ -260,11 +270,9 @@ export const getServerSideProps = async ({ req, params }) => {
     };
   }
 
-  // const {
-  //   data: { ip },
-  // } = await axios.get(`https://api.ipify.org?format=json`);
+  console.log(req.headers);
   const ip = req.headers["x-real-ip"] || req.connection.remoteAddress;
-
+  console.log(ip);
   const geoInfo = geoip.lookup(ip);
   const geo =
     geoInfo !== null

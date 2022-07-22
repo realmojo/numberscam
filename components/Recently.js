@@ -7,7 +7,7 @@ import { Typography } from "antd";
 import "moment/locale/ko";
 import { PhoneOutlined } from "@ant-design/icons";
 
-export const Recently = ({ number }) => {
+export const Recently = ({ number, CODE }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -23,7 +23,11 @@ export const Recently = ({ number }) => {
           margin: 0,
         }}
       >
-        최근에 등록된 전화번호
+        {CODE === "JP"
+          ? "最近登録された電話番号"
+          : CODE === "KR"
+          ? "최근에 등록된 전화번호"
+          : "Recently registered phone number"}
       </Typography.Title>
       <List
         itemLayout="horizontal"
