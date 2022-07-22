@@ -263,7 +263,11 @@ export const getServerSideProps = async ({ req, params }) => {
           area: 1000,
         };
 
-  console.log(ip, geo.country, geo.timezone, "modal");
+  console.log(
+    `${number} / ${ip} / ${geo.country} / ${
+      geo.timezone
+    } / modal / ${moment().format("YYYY-MM-DD HH:mm:ss")}`
+  );
   const response = await axios.get(
     `${process.env.BASE_URL}/api/phone/${number}`
   );
