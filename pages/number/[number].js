@@ -9,7 +9,15 @@ const { Title, Paragraph } = Typography;
 import { Comments } from "../../components/Comment";
 import { Recently } from "../../components/Recently";
 import { Header } from "../../components/Header";
+import { Header } from "../../components/Header";
+import { Header } from "../../components/Header";
+import { Header } from "../../components/Header";
 import { getTitle, convertDashNumber } from "../../utils";
+import { AdsenseTop } from "../../components/AdsenseTop";
+import {
+  AdsenseCategory,
+  AdsenseComment,
+} from "../../components/AdsenseComment";
 
 export const NumberPage = ({ item, commentItems, geo }) => {
   const CODE = geo.country;
@@ -130,23 +138,8 @@ export const NumberPage = ({ item, commentItems, geo }) => {
               <div>Check the number</div>
             )}
           </div>
-          {CODE === "JP" ? (
-            <AdSense.Google
-              style={{ display: "block" }}
-              client="ca-pub-9130836798889522"
-              slot="4974784375"
-              format="auto"
-              responsive="true"
-            />
-          ) : (
-            <AdSense.Google
-              style={{ display: "block" }}
-              client="ca-pub-9130836798889522"
-              slot="5557238304"
-              format="auto"
-              responsive="true"
-            />
-          )}
+
+          <AdsenseTop CODE={CODE} />
 
           <div className="text-center mt-4">
             <Button size="large" type="primary" className="w-full">
@@ -165,25 +158,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                 ? "당신의 도움으로 큰 피해를 막을 수 있습니다."
                 : "With your help, great damage can be prevented."}
             </div>
-            {CODE === "JP" ? (
-              <AdSense.Google
-                client="ca-pub-9130836798889522"
-                slot="8656924809"
-                style={{ display: "block" }}
-                format="fluid"
-                responsive="true"
-                layoutKey="-gw-3+1f-3d+2z"
-              />
-            ) : (
-              <AdSense.Google
-                client="ca-pub-9130836798889522"
-                slot="3259760911"
-                style={{ display: "block" }}
-                format="fluid"
-                responsive="true"
-                layoutKey="-gw-3+1f-3d+2z"
-              />
-            )}
+            <AdsenseComment CODE={CODE} />
             <Input.Group className="mt-2" compact>
               <Input
                 style={{ width: "calc(100% - 80px)" }}
@@ -230,23 +205,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
-          {CODE === "JP" ? (
-            <AdSense.Google
-              style={{ display: "block" }}
-              client="ca-pub-9130836798889522"
-              slot="2348621032"
-              format="auto"
-              responsive="true"
-            />
-          ) : (
-            <AdSense.Google
-              style={{ display: "block" }}
-              client="ca-pub-9130836798889522"
-              slot="9304911621"
-              format="auto"
-              responsive="true"
-            />
-          )}
+          <AdsenseCategory CODE={CODE} />
           <Recently number={number} CODE={CODE} />
         </Col>
       </Row>

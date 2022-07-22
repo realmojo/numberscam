@@ -27,6 +27,8 @@ export const Recently = ({ number, CODE }) => {
           ? "最近登録された電話番号"
           : CODE === "KR"
           ? "최근에 등록된 전화번호"
+          : CODE === "BR"
+          ? "Número de telefone cadastrado recentemente"
           : "Recently registered phone number"}
       </Typography.Title>
       <List
