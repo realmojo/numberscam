@@ -245,7 +245,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
 };
 export default NumberPage;
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ req, params }) => {
   const geoip = require("geoip-lite");
   let { number } = params;
   number = number.replace(/[^0-9]/g, "");
@@ -260,9 +260,10 @@ export const getServerSideProps = async ({ params }) => {
     };
   }
 
-  const {
-    data: { ip },
-  } = await axios.get(`https://api.ipify.org?format=json`);
+  // const {
+  //   data: { ip },
+  // } = await axios.get(`https://api.ipify.org?format=json`);
+  const ip = req.headers["x-real-ip"] || req.connection.remoteAddress;
   console.log(ip);
   const geo = geoip.lookup(ip);
   console.log(geo);
