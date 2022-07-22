@@ -226,7 +226,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
 export default NumberModalPage;
 
 export const getServerSideProps = async ({ req, params }) => {
-  const geoip = require("geoip-lite");
+  const geoip = require("fast-geoip");
   let { number } = params;
   number = number.replace(/[^0-9]/g, "");
 
@@ -257,6 +257,7 @@ export const getServerSideProps = async ({ req, params }) => {
           area: 1000,
         };
 
+  console.log(ip, geo.country, geo.timezone, "modal");
   const response = await axios.get(
     `${process.env.BASE_URL}/api/phone/${number}`
   );

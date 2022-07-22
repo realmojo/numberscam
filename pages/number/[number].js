@@ -256,7 +256,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
 export default NumberPage;
 
 export const getServerSideProps = async ({ req, params }) => {
-  const geoip = require("geoip-lite");
+  const geoip = require("fast-geoip");
   let { number } = params;
   number = number.replace(/[^0-9]/g, "");
 
@@ -272,6 +272,8 @@ export const getServerSideProps = async ({ req, params }) => {
 
   const ip = req.headers["x-real-ip"] || req.connection.remoteAddress;
   const geoInfo = geoip.lookup(ip);
+  // const geoInfo = await geoip.lookup("37.19.205.175");
+  console.log(geoInfo);
   const geo =
     geoInfo !== null
       ? geoInfo
