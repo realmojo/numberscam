@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import axios from "axios";
 import moment from "moment";
-import AdSense from "react-adsense";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Row, Col, Form, Input, Button, Divider, Typography } from "antd";
@@ -16,6 +15,7 @@ import Modal from "react-modal";
 
 export const NumberModalPage = ({ item, commentItems, geo }) => {
   const CODE = geo.country;
+  const router = useRouter();
   const { number, content, ip, created, updated } = item;
   const [message, setMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
@@ -38,6 +38,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
     brand: "Phonebookup",
     datePublished: `${created}`,
   };
+
   const submit = (number, message) => {
     if (!message) {
       setIsEmpty(true);
@@ -63,6 +64,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
       }, 2000);
     });
   };
+
   const handleClickSubmit = () => {
     submit(number, message);
   };
@@ -74,6 +76,10 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
   const onChange = (e) => {
     const { value } = e.target;
     setMessage(value);
+  };
+
+  const closeModal = () => {
+    router.push(`/number/${number}`);
   };
 
   return (
