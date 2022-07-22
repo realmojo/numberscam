@@ -13,6 +13,7 @@ import { Header } from "../../components/Header";
 import { getTitle, convertDashNumber } from "../../utils";
 
 export const NumberPage = ({ item, commentItems, geo }) => {
+  console.log(geo);
   const { number, content, ip, created, updated } = item;
   const [message, setMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
