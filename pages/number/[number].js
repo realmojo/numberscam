@@ -128,23 +128,29 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           <Title>{getTitle(number)}</Title>
           <Divider style={{ margin: "4px 0" }} />
           <Paragraph className="text-right text-gray-400">{created}</Paragraph>
-
           <div className="text-center mb-2">
             {CODE === "JP" ? (
               <div>番号を確認してください</div>
             ) : CODE === "KR" ? (
               <div>번호를 확인해 보세요</div>
+            ) : CODE === "BR" ? (
+              <div>verifique o número</div>
             ) : (
               <div>Check the number</div>
             )}
           </div>
 
           <AdsenseTop CODE={CODE} />
-
           <div className="text-center mt-4">
             <Button size="large" type="primary" className="w-full">
               <Link href={`/number/${number}/modal`} target="_blank">
-                <a>{CODE === "JP" ? "スタート" : "START"}</a>
+                <a>
+                  {CODE === "JP"
+                    ? "スタート"
+                    : CODE === "BR"
+                    ? "começar"
+                    : "START"}
+                </a>
               </Link>
             </Button>
           </div>
@@ -156,6 +162,8 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                 ? "あなたの助けを借りて大きなダメージを防ぐことができます。"
                 : CODE === "KR"
                 ? "당신의 도움으로 큰 피해를 막을 수 있습니다."
+                : CODE === "BR"
+                ? "Com sua ajuda, grandes danos podem ser evitados."
                 : "With your help, great damage can be prevented."}
             </div>
             <AdsenseComment CODE={CODE} />
@@ -170,6 +178,8 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                     ? "この番号について教えてください。"
                     : CODE === "KR"
                     ? "이 번호에 대해 알려주세요."
+                    : CODE === "BR"
+                    ? "Por favor, me fale sobre este número."
                     : "Please tell me about this number."
                 }
                 onKeyDown={(e) => {
@@ -182,7 +192,13 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                 onClick={(e) => handleClickSubmit(e)}
                 type="primary"
               >
-                {CODE === "JP" ? "入力" : CODE === "KR" ? "등록" : "Register"}
+                {CODE === "JP"
+                  ? "入力"
+                  : CODE === "KR"
+                  ? "등록"
+                  : CODE === "BR"
+                  ? "entrada"
+                  : "Register"}
               </Button>
             </Input.Group>
           </Form.Item>
@@ -192,6 +208,8 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                 ? "登録が完了しました。"
                 : CODE === "KR"
                 ? "등록이 완료되었습니다."
+                : CODE === "BR"
+                ? "O registro está completo."
                 : "Done."}
             </div>
           )}

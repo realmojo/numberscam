@@ -85,7 +85,7 @@ const bingIndexApi = (number) => {
     if (error) {
       console.log(error);
     }
-    console.log(`bing indexing api success: ${number}, ${body}`);
+    console.log(`bing indexing api success: ${number}, ${body?.Message}`);
   });
 };
 
