@@ -20,6 +20,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
   const [isEmpty, setIsEmpty] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
+  const [isComment, setIsComment] = useState(false);
   const [comments, setComments] = useState(commentItems);
 
   useEffect(() => {
@@ -121,8 +122,8 @@ export const NumberPage = ({ item, commentItems, geo }) => {
         >
           <Title>{getTitle(number)}</Title>
           <Divider style={{ margin: "4px 0" }} />
-          <Paragraph className="text-right text-gray-400">{created}</Paragraph>
-          <div className="text-center mb-2">
+          {/* <Paragraph className="text-right text-gray-400">{created}</Paragraph> */}
+          {/* <div className="text-center mb-2">
             {CODE === "JP" ? (
               <div>番号を確認してください</div>
             ) : CODE === "KR" ? (
@@ -132,7 +133,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             ) : (
               <div>Check the number</div>
             )}
-          </div>
+          </div> */}
 
           <AdsenseTop CODE={CODE} />
           <div className="text-center mt-4">
@@ -140,10 +141,12 @@ export const NumberPage = ({ item, commentItems, geo }) => {
               <Link href={`/number/${number}/modal`} target="_blank">
                 <a>
                   {CODE === "JP"
-                    ? "スタート"
+                    ? "確認"
                     : CODE === "BR"
-                    ? "começar"
-                    : "START"}
+                    ? "confirme"
+                    : CODE === "KR"
+                    ? "확인"
+                    : "Confirm"}
                 </a>
               </Link>
             </Button>
@@ -207,9 +210,26 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                 : "Done."}
             </div>
           )}
-          {comments.map((item, index) => (
-            <Comments index={index} key={index} item={item} />
-          ))}
+          {isComment ? (
+            comments.map((item, index) => (
+              <Comments index={index} key={index} item={item} />
+            ))
+          ) : (
+            <Button
+              size="large"
+              type="primary"
+              className="w-full"
+              onClick={() => setIsComment(true)}
+            >
+              {CODE === "JP"
+                ? "もっと見る"
+                : CODE === "KR"
+                ? "더보기"
+                : CODE === "BR"
+                ? "Veja mais"
+                : "View more"}
+            </Button>
+          )}
         </Col>
         <Col
           className="px-4"
