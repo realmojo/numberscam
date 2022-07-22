@@ -270,9 +270,7 @@ export const getServerSideProps = async ({ req, params }) => {
     };
   }
 
-  console.log(req.headers);
   const ip = req.headers["x-real-ip"] || req.connection.remoteAddress;
-  console.log(ip);
   const geoInfo = geoip.lookup(ip);
   const geo =
     geoInfo !== null
@@ -288,7 +286,7 @@ export const getServerSideProps = async ({ req, params }) => {
           metro: 0,
           area: 1000,
         };
-  console.log(geo);
+  console.log(ip, geo.country, geo.timezone);
   const response = await axios.get(
     `${process.env.BASE_URL}/api/phone/${number}`
   );

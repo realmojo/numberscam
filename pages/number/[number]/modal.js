@@ -15,7 +15,7 @@ import { getTitle, convertDashNumber } from "../../../utils";
 import Modal from "react-modal";
 
 export const NumberModalPage = ({ item, commentItems, geo }) => {
-  const router = useRouter();
+  const CODE = geo.country;
   const { number, content, ip, created, updated } = item;
   const [message, setMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
@@ -76,10 +76,6 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
     setMessage(value);
   };
 
-  const closeModal = () => {
-    router.push(`/number/${number}`);
-  };
-
   return (
     <>
       <Head>
@@ -129,42 +125,45 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
           <Paragraph className="text-right text-gray-400">{created}</Paragraph>
 
           <div className="text-center mb-2">
-            {geo.country === "JP" ? (
-              <div>確認したい番号を選択してください</div>
+            {CODE === "JP" ? (
+              <div>番号を確認してください</div>
+            ) : CODE === "KR" ? (
+              <div>번호를 확인해 보세요</div>
             ) : (
-              ""
-            )}
-            {geo.country === "KR" ? (
-              <div>확인하고 싶은 번호를 선택해주세요</div>
-            ) : (
-              <div>Please select the number you want to check</div>
+              <div>Check the number</div>
             )}
           </div>
-          <div className="text-center">
-            <Button className="mr-2" size="large" type="primary">
+
+          <div className="text-center mt-4">
+            <Button size="large" type="primary" className="w-full">
               <Link href={`/number/${number}/modal`} target="_blank">
-                <a>{number}</a>
-              </Link>
-            </Button>
-            <Button size="large" type="primary">
-              <Link href={`/number/${number}/modal`} target="_blank">
-                <a>{convertDashNumber(number)}</a>
+                <a>{CODE === "JP" ? "スタート" : "START"}</a>
               </Link>
             </Button>
           </div>
           <Divider style={{ margin: "8px 0" }} />
           <Form.Item>
             <div className="mb-2 text-xs">
-              <span className="mr-2">👉</span> 당신의 도움으로 큰 피해를 막을 수
-              있습니다.
+              <span className="mr-2">👉</span>{" "}
+              {CODE === "JP"
+                ? "あなたの助けを借りて大きなダメージを防ぐことができます。"
+                : CODE === "KR"
+                ? "당신의 도움으로 큰 피해를 막을 수 있습니다."
+                : "With your help, great damage can be prevented."}
             </div>
-            <Input.Group compact>
+            <Input.Group className="mt-2" compact>
               <Input
                 style={{ width: "calc(100% - 80px)" }}
                 value={message}
                 status={isEmpty ? "error" : ""}
                 onChange={onChange}
-                placeholder="이 번호에 대해서 알려주세요."
+                placeholder={
+                  CODE === "JP"
+                    ? "この番号について教えてください。"
+                    : CODE === "KR"
+                    ? "이 번호에 대해 알려주세요."
+                    : "Please tell me about this number."
+                }
                 onKeyDown={(e) => {
                   handleSubmit(e);
                 }}
@@ -175,11 +174,19 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
                 onClick={(e) => handleClickSubmit(e)}
                 type="primary"
               >
-                등록
+                {CODE === "JP" ? "入力" : CODE === "KR" ? "등록" : "Register"}
               </Button>
             </Input.Group>
           </Form.Item>
-          {isComplete && <div className="ml-2">등록이 완료되었습니다.</div>}
+          {isComplete && (
+            <div className="ml-2">
+              {CODE === "JP"
+                ? "登録が完了しました。"
+                : CODE === "KR"
+                ? "등록이 완료되었습니다."
+                : "Done."}
+            </div>
+          )}
           {comments.map((item, index) => (
             <Comments index={index} key={index} item={item} />
           ))}
@@ -190,29 +197,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
-          <AdSense.Google
-            client="ca-pub-9130836798889522"
-            slot="1853974629"
-            style={{ display: "block" }}
-            format="fluid"
-            responsive="true"
-            layoutKey="-gw-3+1f-3d+2z"
-          />
-          <Recently number={number} />
-
-          <Modal
-            isOpen={true}
-            onRequestClose={() => router.push(`/number/${number}`)}
-            contentLabel="number modal"
-            ariaHideApp={false}
-          >
-            <p>
-              {comments[0] !== undefined
-                ? comments[0].message
-                : "아직 등록되지 않은 번호 입니다. 첫 댓글이 내용으로 들어갑니다."}
-            </p>
-            <Button onClick={() => closeModal()}>닫기</Button>
-          </Modal>
+          <Recently number={number} CODE={CODE} />
         </Col>
       </Row>
     </>
@@ -220,7 +205,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
 };
 export default NumberModalPage;
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ req, params }) => {
   const geoip = require("geoip-lite");
   let { number } = params;
   number = number.replace(/[^0-9]/g, "");
@@ -235,10 +220,23 @@ export const getServerSideProps = async ({ params }) => {
     };
   }
 
-  const {
-    data: { ip },
-  } = await axios.get(`https://api.ipify.org?format=json`);
-  const geo = geoip.lookup(ip);
+  const ip = req.headers["x-real-ip"] || req.connection.remoteAddress;
+  const geoInfo = geoip.lookup(ip);
+  const geo =
+    geoInfo !== null
+      ? geoInfo
+      : {
+          range: [877527040, 877658111],
+          country: "KR",
+          region: "28",
+          eu: "0",
+          timezone: "Asia/Seoul",
+          city: "Incheon",
+          ll: [37.4562, 126.7288],
+          metro: 0,
+          area: 1000,
+        };
+
   const response = await axios.get(
     `${process.env.BASE_URL}/api/phone/${number}`
   );
