@@ -1,8 +1,12 @@
 import { PHONE_START_NUMBER, LOCATION_START_NUMBER } from "../config";
 
 export const convertIP = (value) => {
-  const s = value.split(".");
-  return `${s[0]}.x.x.${s[3]}`;
+  if (value) {
+    const s = value.split(".");
+    return `${s[0]}.x.x.${s[3]}`;
+  } else {
+    return "1.2.3.4";
+  }
 };
 
 export const convertDashNumber = (n) => {
