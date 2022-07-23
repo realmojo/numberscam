@@ -9,6 +9,7 @@ import NextNProgress from "nextjs-progressbar";
 import { Layout } from "antd";
 const { Footer } = Layout;
 import * as gtag from "../lib/gtag";
+import { hotjar } from "react-hotjar";
 
 function MyApp({ Component, pageProps }) {
   const schemaData = {
@@ -33,6 +34,8 @@ function MyApp({ Component, pageProps }) {
     const handleRouteChange = (url) => {
       gtag.pageview(url);
     };
+    hotjar.initialize(3079005, 6);
+
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
