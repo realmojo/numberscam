@@ -6,7 +6,7 @@ export const AdsenseComment = ({ CODE }) => {
     <>
       {CODE === "JP" ? (
         <AdSense.Google
-          client="ca-pub-7292810486004926"
+          client="ca-pub-9130836798889522"
           slot="5798433960"
           style={{ display: "block", textAlign: "center" }}
           layout="in-article"
@@ -22,7 +22,7 @@ export const AdsenseComment = ({ CODE }) => {
       // />
       CODE === "BR" ? (
         <AdSense.Google
-          client="ca-pub-7292810486004926"
+          client="ca-pub-9130836798889522"
           slot="2513795075"
           style={{ display: "block", textAlign: "center" }}
           layout="in-article"
@@ -38,7 +38,7 @@ export const AdsenseComment = ({ CODE }) => {
         //   layoutKey="-gw-3+1f-3d+2z"
         // />
         <AdSense.Google
-          client="ca-pub-7292810486004926"
+          client="ca-pub-9130836798889522"
           slot="8340836825"
           style={{ display: "block", textAlign: "center" }}
           layout="in-article"
