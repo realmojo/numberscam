@@ -137,7 +137,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
 
           <AdsenseTop CODE={CODE} />
           <div className="text-center mt-4">
-            <Button size="large" type="primary" className="w-full">
+            <Button size="large" className="w-full">
               <Link href={`/number/${number}/modal`} target="_blank">
                 <a>
                   {CODE === "JP"
@@ -187,7 +187,6 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                 htmlType="submit"
                 loading={isLoading}
                 onClick={(e) => handleClickSubmit(e)}
-                type="primary"
               >
                 {CODE === "JP"
                   ? "入力"
@@ -217,7 +216,6 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           ) : (
             <Button
               size="large"
-              type="primary"
               className="w-full"
               onClick={() => setIsComment(true)}
             >
@@ -237,7 +235,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
-          <AdsenseCategory CODE={CODE} />
+          {/* <AdsenseCategory CODE={CODE} /> */}
           <Recently number={number} CODE={CODE} />
         </Col>
       </Row>

@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import "antd/dist/antd.css";
+import "antd/dist/antd.dark.css";
+// import "antd/dist/antd.compact.css";
 import NextNProgress from "nextjs-progressbar";
 import { Layout } from "antd";
 const { Footer } = Layout;

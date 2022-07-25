@@ -63,7 +63,7 @@ export const Recently = ({ number, CODE }) => {
                   </Tooltip>
                 </>
               }
-              description={<div style={{ color: "#000" }}>{item.message}</div>}
+              description={<div>{item.message}</div>}
             />
           </List.Item>
         )}
