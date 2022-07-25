@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import axios from "axios";
 import moment from "moment";
-import Link from "next/link";
+// import Link from "next/link";
 import { Row, Col, Form, Input, Button, Divider, Typography } from "antd";
 const { Title, Paragraph } = Typography;
 import { Comments } from "../../components/Comment";
@@ -11,7 +11,7 @@ import { Header } from "../../components/Header";
 import { getTitle } from "../../utils";
 import { AdsenseTop } from "../../components/AdsenseTop";
 import { AdsenseCategory } from "../../components/AdsenseCategory";
-import { AdsenseComment } from "../../components/AdsenseComment";
+// import { AdsenseComment } from "../../components/AdsenseComment";
 
 export const NumberPage = ({ item, commentItems, geo }) => {
   const CODE = geo.country;
@@ -23,8 +23,14 @@ export const NumberPage = ({ item, commentItems, geo }) => {
   const [isComment, setIsComment] = useState(false);
   const [comments, setComments] = useState(commentItems);
 
+  const [isView, setIsView] = useState(false);
+  // console.log(isView);
   useEffect(() => {
     setComments(commentItems);
+    setIsView(false);
+    setTimeout(() => {
+      setIsView(true);
+    }, 4000);
   }, [commentItems]);
   const schemaData = {
     "@context": "http://schema.org",
@@ -123,7 +129,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           <Title>{getTitle(number)}</Title>
           <Divider style={{ margin: "4px 0" }} />
           {/* <Paragraph className="text-right text-gray-400">{created}</Paragraph> */}
-          {/* <div className="text-center mb-2">
+          <div className="text-center mb-2">
             {CODE === "JP" ? (
               <div>番号を確認してください</div>
             ) : CODE === "KR" ? (
@@ -133,24 +139,38 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             ) : (
               <div>Check the number</div>
             )}
-          </div> */}
+          </div>
 
           <AdsenseTop CODE={CODE} />
-          <div className="text-center mt-4">
-            <Button size="large" className="w-full">
-              <Link href={`/number/${number}/modal`} target="_blank">
-                <a>
-                  {CODE === "JP"
-                    ? "確認"
-                    : CODE === "BR"
-                    ? "confirme"
-                    : CODE === "KR"
-                    ? "확인"
-                    : "Confirm"}
-                </a>
-              </Link>
-            </Button>
-          </div>
+          {isView ? (
+            <Title level={4}>
+              {comments[0] !== undefined
+                ? comments[0].message
+                : CODE === "JP"
+                ? "まだ登録されていない番号です。 最初のコメントが内容に入ります。"
+                : CODE === "KR"
+                ? "아직 등록되지 않은 번호 입니다. 첫 댓글이 내용으로 들어갑니다."
+                : "This number has not been registered yet. The first comment enters the content."}
+            </Title>
+          ) : (
+            // <div className="text-center mt-4">
+            //   <Button size="large" className="w-full">
+            //     <Link href={`/number/${number}/modal`} target="_blank">
+            //       <a>
+            //         {CODE === "JP"
+            //           ? "確認"
+            //           : CODE === "BR"
+            //           ? "confirme"
+            //           : CODE === "KR"
+            //           ? "확인"
+            //           : "Confirm"}
+            //       </a>
+            //     </Link>
+            //   </Button>
+            // </div>
+            ""
+          )}
+
           <Divider style={{ margin: "8px 0" }} />
           <Form.Item>
             <div className="mb-2 text-xs">
@@ -163,7 +183,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                 ? "Com sua ajuda, grandes danos podem ser evitados."
                 : "With your help, great damage can be prevented."}
             </div>
-            <AdsenseComment CODE={CODE} />
+            {/* <AdsenseComment CODE={CODE} /> */}
             <Input.Group className="mt-2" compact>
               <Input
                 style={{ width: "calc(100% - 80px)" }}
@@ -235,7 +255,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
-          {/* <AdsenseCategory CODE={CODE} /> */}
+          <AdsenseCategory CODE={CODE} />
           <Recently number={number} CODE={CODE} />
         </Col>
       </Row>
