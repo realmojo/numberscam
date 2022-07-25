@@ -12,6 +12,7 @@ import { getTitle } from "../../utils";
 import { AdsenseTop } from "../../components/AdsenseTop";
 // import { AdsenseCategory } from "../../components/AdsenseCategory";
 import { AdsenseComment } from "../../components/AdsenseComment";
+import { AdsenseMultiplex } from "../../components/AdsenseMultiplex";
 
 export const NumberPage = ({ item, commentItems, geo }) => {
   const CODE = geo.country;
@@ -257,6 +258,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
         >
           {/* <AdsenseCategory CODE={CODE} /> */}
           <Recently number={number} CODE={CODE} />
+          <AdsenseMultiplex CODE={CODE} />
         </Col>
       </Row>
     </>
