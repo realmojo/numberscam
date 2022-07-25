@@ -6,6 +6,10 @@ body {
   background-color: #222222 !important;
 }
 
+.ReactModal__Content {
+  background-color: #444 !important;
+}
+
 .ant-input-affix-wrapper {
   border: white !important;
 }

@@ -141,7 +141,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
           </div>
 
           <div className="text-center mt-4">
-            <Button size="large" type="primary" className="w-full">
+            <Button size="large" className="w-full">
               <Link href={`/number/${number}/modal`} target="_blank">
                 <a>{CODE === "JP" ? "スタート" : "START"}</a>
               </Link>
@@ -178,7 +178,6 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
                 htmlType="submit"
                 loading={isLoading}
                 onClick={(e) => handleClickSubmit(e)}
-                type="primary"
               >
                 {CODE === "JP" ? "入力" : CODE === "KR" ? "등록" : "Register"}
               </Button>
@@ -211,7 +210,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
             contentLabel="number modal"
             ariaHideApp={false}
           >
-            <p>
+            <Title level={4}>
               {comments[0] !== undefined
                 ? comments[0].message
                 : CODE === "JP"
@@ -219,7 +218,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
                 : CODE === "KR"
                 ? "아직 등록되지 않은 번호 입니다. 첫 댓글이 내용으로 들어갑니다."
                 : "This number has not been registered yet. The first comment enters the content."}
-            </p>
+            </Title>
             <Button onClick={() => closeModal()}>
               {CODE === "JP" ? "閉じる" : CODE === "KR" ? "닫기" : "Close"}
             </Button>
