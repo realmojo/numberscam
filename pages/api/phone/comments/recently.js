@@ -10,7 +10,7 @@ const handler = async (req, res) => {
         .sort({
           created: -1,
         })
-        .limit(20);
+        .limit(5);
       res.status(200).json({ recentlyItems });
       break;
   }
