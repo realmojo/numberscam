@@ -10,8 +10,8 @@ import { Recently } from "../../components/Recently";
 import { Header } from "../../components/Header";
 import { getTitle } from "../../utils";
 import { AdsenseTop } from "../../components/AdsenseTop";
-import { AdsenseCategory } from "../../components/AdsenseCategory";
-// import { AdsenseComment } from "../../components/AdsenseComment";
+// import { AdsenseCategory } from "../../components/AdsenseCategory";
+import { AdsenseComment } from "../../components/AdsenseComment";
 
 export const NumberPage = ({ item, commentItems, geo }) => {
   const CODE = geo.country;
@@ -141,7 +141,6 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             )}
           </div>
 
-          <AdsenseTop CODE={CODE} />
           {isView ? (
             <Title level={4}>
               {comments[0] !== undefined
@@ -170,6 +169,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             // </div>
             ""
           )}
+          <AdsenseTop CODE={CODE} />
 
           <Divider style={{ margin: "8px 0" }} />
           <Form.Item>
@@ -183,7 +183,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
                 ? "Com sua ajuda, grandes danos podem ser evitados."
                 : "With your help, great damage can be prevented."}
             </div>
-            {/* <AdsenseComment CODE={CODE} /> */}
+            <AdsenseComment CODE={CODE} />
             <Input.Group className="mt-2" compact>
               <Input
                 style={{ width: "calc(100% - 80px)" }}
@@ -255,7 +255,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
           sm={{ span: 24 }}
           lg={{ span: 8 }}
         >
-          <AdsenseCategory CODE={CODE} />
+          {/* <AdsenseCategory CODE={CODE} /> */}
           <Recently number={number} CODE={CODE} />
         </Col>
       </Row>
