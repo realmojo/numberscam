@@ -22,23 +22,26 @@ body {
 
 .ant-page-header-heading,
 .container-wrap {
-  width: 1024px !important;
+  max-width: 576px !important;
   margin: 0 auto !important;
 }
 
-.ant-page-header-heading-left {
+/* .ant-page-header-heading-left {
   padding-left: 18px;
+} */
+.ant-page-header {
+  padding: 4px 4px !important;
+}
+.ant-page-header-heading-left {
+  padding-left: 0;
 }
 
 @media (max-width: 1024px) {
-  .ant-page-header-heading,
+  /* .ant-page-header-heading,
   .container-wrap {
-    width: 100% !important;
-    margin: 0 !important;
-  }
-  .ant-page-header-heading-left {
-    padding-left: 0;
-  }
+    max-width: 576px !important;
+    margin: 0 auto !important;
+  } */
 }
 
 h1 {

@@ -120,12 +120,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
       </Head>
       <Header />
       <Row className="pt-4 container-wrap">
-        <Col
-          xs={{ span: 24 }}
-          sm={{ span: 24 }}
-          lg={{ span: 16 }}
-          className="px-4"
-        >
+        <Col xs={{ span: 24 }} className="px-4">
           <Title>{getTitle(number)}</Title>
           <Divider style={{ margin: "4px 0" }} />
           <Paragraph className="text-right text-gray-400">{created}</Paragraph>
@@ -159,7 +154,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
             </div>
             <Input.Group className="mt-2" compact>
               <Input
-                style={{ width: "calc(100% - 80px)" }}
+                style={{ width: "calc(100% - 56px)" }}
                 value={message}
                 status={isEmpty ? "error" : ""}
                 onChange={onChange}
@@ -196,12 +191,7 @@ export const NumberModalPage = ({ item, commentItems, geo }) => {
             <Comments index={index} key={index} item={item} />
           ))}
         </Col>
-        <Col
-          className="px-4"
-          xs={{ span: 24 }}
-          sm={{ span: 24 }}
-          lg={{ span: 8 }}
-        >
+        <Col className="px-4" xs={{ span: 24 }}>
           <Recently number={number} CODE={CODE} />
 
           <Modal

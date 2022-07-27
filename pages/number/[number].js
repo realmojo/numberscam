@@ -31,7 +31,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
     setIsView(false);
     setTimeout(() => {
       setIsView(true);
-    }, 4000);
+    }, 2000);
   }, [commentItems]);
   const schemaData = {
     "@context": "http://schema.org",
@@ -121,12 +121,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
       </Head>
       <Header />
       <Row className="pt-4 container-wrap">
-        <Col
-          xs={{ span: 24 }}
-          sm={{ span: 24 }}
-          lg={{ span: 16 }}
-          className="px-4"
-        >
+        <Col xs={{ span: 24 }} className="px-4">
           <Title>{getTitle(number)}</Title>
           <Divider style={{ margin: "4px 0" }} />
           {/* <Paragraph className="text-right text-gray-400">{created}</Paragraph> */}
@@ -187,7 +182,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             <AdsenseComment CODE={CODE} />
             <Input.Group className="mt-2" compact>
               <Input
-                style={{ width: "calc(100% - 80px)" }}
+                style={{ width: "calc(100% - 56px)" }}
                 value={message}
                 status={isEmpty ? "error" : ""}
                 onChange={onChange}
@@ -250,12 +245,7 @@ export const NumberPage = ({ item, commentItems, geo }) => {
             </Button>
           )}
         </Col>
-        <Col
-          className="px-4"
-          xs={{ span: 24 }}
-          sm={{ span: 24 }}
-          lg={{ span: 8 }}
-        >
+        <Col className="px-4" xs={{ span: 24 }}>
           {/* <AdsenseCategory CODE={CODE} /> */}
           <Recently number={number} CODE={CODE} />
           <AdsenseMultiplex CODE={CODE} />
