@@ -23,7 +23,7 @@ export const Header = () => {
     <SearchOutlined
       style={{
         fontSize: 16,
-        color: "#fff",
+        color: "#1890ff",
       }}
       onClick={() => onSearch()}
     />
@@ -51,7 +51,6 @@ export const Header = () => {
                 placeholder="전화번호를 검색하세요"
                 onPressEnter={() => onSearch()}
                 suffix={suffix}
-                style={{ background: "#303030" }}
               />
             </Input.Group>
           </Space>

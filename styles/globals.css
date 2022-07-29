@@ -2,17 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #222222 !important;
-}
-
 .ReactModal__Content {
   background-color: #444 !important;
 }
 
-.ant-input-affix-wrapper {
-  border: white !important;
-}
+/* .ant-input-affix-wrapper {
+  border: #ffffff !important;
+} */
 .ant-input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #ddd !important;
