@@ -62,11 +62,11 @@ function MyApp({ Component, pageProps }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
-        {/* <script
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9130836798889522"
           crossOrigin="anonymous"
-        /> */}
+        />
         <script async type="text/javascript" src="//wcs.naver.net/wcslog.js" />
         <script
           async
